@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -66,37 +67,28 @@ footer{text-align:center;color:#777;padding:25px;font-size:13px}
  border:1px solid #ccd4c8;
  border-radius:8px;
  font-size:16px;
- background:#f8f9f6;
- color:#26372b;
-}
-.field input:not([readonly]){
  background:white;
- border:2px solid #405b45;
+ color:#26372b;
 }
 .actions{
  display:flex;
  gap:8px;
  margin-top:10px;
- flex-wrap:wrap;
 }
 .action{
- padding:10px 14px;
+ padding:9px 14px;
  border:0;
  border-radius:8px;
  font-size:14px;
  cursor:pointer;
 }
-.save{
- background:#405b45;
- color:white;
-}
 .delete{
  background:#f4e5e3;
  color:#a12f2f;
 }
-.cancel{
- background:#e5e9e1;
- color:#26372b;
+.save{
+ background:#405b45;
+ color:white;
 }
 .back{
  width:100%;
@@ -152,66 +144,54 @@ footer{text-align:center;color:#777;padding:25px;font-size:13px}
 <div id="personal" class="page">
  <div class="intro">
   <h2>البيانات الشخصية</h2>
-  <p>أضيفي معلوماتك أو عدّليها واحفظيها.</p>
+  <p>اضغطي على الحقل واكتبي المعلومات، ثم احفظي جميع البيانات.</p>
  </div>
 
  <div class="field">
   <label>الاسم الكامل</label>
-  <input id="fullName" type="text" readonly>
+  <input id="fullName" type="text">
   <div class="actions">
-   <button id="btn-fullName" class="action save" onclick="editField('fullName')">إضافة</button>
-   <button id="del-fullName" class="action delete" onclick="deleteField('fullName')">حذف</button>
-   <button id="cancel-fullName" class="action cancel" style="display:none" onclick="cancelEdit('fullName')">إلغاء</button>
+   <button class="action delete" onclick="deleteField('fullName')">حذف</button>
   </div>
  </div>
 
  <div class="field">
   <label>اسم الأم</label>
-  <input id="motherName" type="text" readonly>
+  <input id="motherName" type="text">
   <div class="actions">
-   <button id="btn-motherName" class="action save" onclick="editField('motherName')">إضافة</button>
-   <button id="del-motherName" class="action delete" onclick="deleteField('motherName')">حذف</button>
-   <button id="cancel-motherName" class="action cancel" style="display:none" onclick="cancelEdit('motherName')">إلغاء</button>
+   <button class="action delete" onclick="deleteField('motherName')">حذف</button>
   </div>
  </div>
 
  <div class="field">
   <label>تاريخ الولادة</label>
-  <input id="birthDate" type="date" readonly>
+  <input id="birthDate" type="date">
   <div class="actions">
-   <button id="btn-birthDate" class="action save" onclick="editField('birthDate')">إضافة</button>
-   <button id="del-birthDate" class="action delete" onclick="deleteField('birthDate')">حذف</button>
-   <button id="cancel-birthDate" class="action cancel" style="display:none" onclick="cancelEdit('birthDate')">إلغاء</button>
+   <button class="action delete" onclick="deleteField('birthDate')">حذف</button>
   </div>
  </div>
 
  <div class="field">
   <label>مكان الولادة</label>
-  <input id="birthPlace" type="text" readonly>
+  <input id="birthPlace" type="text">
   <div class="actions">
-   <button id="btn-birthPlace" class="action save" onclick="editField('birthPlace')">إضافة</button>
-   <button id="del-birthPlace" class="action delete" onclick="deleteField('birthPlace')">حذف</button>
-   <button id="cancel-birthPlace" class="action cancel" style="display:none" onclick="cancelEdit('birthPlace')">إلغاء</button>
+   <button class="action delete" onclick="deleteField('birthPlace')">حذف</button>
   </div>
  </div>
 
  <div class="field">
   <label>محل السكن</label>
-  <input id="residence" type="text" readonly>
+  <input id="residence" type="text">
   <div class="actions">
-   <button id="btn-residence" class="action save" onclick="editField('residence')">إضافة</button>
-   <button id="del-residence" class="action delete" onclick="deleteField('residence')">حذف</button>
-   <button id="cancel-residence" class="action cancel" style="display:none" onclick="cancelEdit('residence')">إلغاء</button>
+   <button class="action delete" onclick="deleteField('residence')">حذف</button>
   </div>
  </div>
 
  <div class="field">
   <label>رقم الهاتف</label>
-  <input id="phone" type="tel" readonly>
+  <input id="phone" type="tel">
   <div class="actions">
-   <button id="btn-phone" class="action save" onclick="editField('phone')">إضافة</button>
-   <button id="del-phone" class="action delete" onclick="deleteField('phone')">حذف</button>
-   <button id="cancel-phone" class="action cancel" style="display:none" onclick="cancelEdit('phone')">إلغاء</button>
+   <button class="action delete" onclick="deleteField('phone')">حذف</button>
   </div>
  </div>
 
@@ -277,81 +257,14 @@ function goHome(){
  window.scrollTo(0,0);
 }
 
-function updateFieldButtons(id,hasValue){
- const input=document.getElementById(id);
- const button=document.getElementById("btn-"+id);
- const deleteButton=document.getElementById("del-"+id);
- const cancelButton=document.getElementById("cancel-"+id);
-
- input.readOnly=true;
- button.textContent=hasValue?"تعديل":"إضافة";
- button.onclick=()=>editField(id);
- deleteButton.style.display=hasValue?"inline-block":"none";
- cancelButton.style.display="none";
-}
-
 function loadPersonal(){
  const data=getData();
 
  fields.forEach(id=>{
-  const value=data[id] || "";
-  document.getElementById(id).value=value;
-  updateFieldButtons(id,value.trim()!=="");
+  document.getElementById(id).value=data[id] || "";
  });
 
  document.getElementById("message").textContent="";
-}
-
-function editField(id){
- const input=document.getElementById(id);
- const button=document.getElementById("btn-"+id);
- const cancelButton=document.getElementById("cancel-"+id);
- const deleteButton=document.getElementById("del-"+id);
-
- if(input.readOnly){
-  input.dataset.original=input.value;
-  input.dataset.hadValue=input.value.trim()!==""?"yes":"no";
-  input.readOnly=false;
-  button.textContent=input.dataset.hadValue==="yes"?"حفظ التعديل":"حفظ";
-  button.onclick=()=>saveField(id);
-  cancelButton.style.display="inline-block";
-  deleteButton.style.display="none";
-  input.focus();
- }
-}
-
-function saveField(id){
- const input=document.getElementById(id);
- const data=getData();
- data[id]=input.value.trim();
-
- if(storeData(data)){
-  updateFieldButtons(id,data[id]!=="");
-  document.getElementById("message").textContent=
-   "تم حفظ "+labels[id]+" بنجاح";
- }
-}
-
-function cancelEdit(id){
- const input=document.getElementById(id);
- input.value=input.dataset.original || "";
- updateFieldButtons(id,input.value.trim()!=="");
-}
-
-function deleteField(id){
- if(!confirm("هل تريدين حذف "+labels[id]+" فقط؟")){
-  return;
- }
-
- const data=getData();
- delete data[id];
-
- if(storeData(data)){
-  document.getElementById(id).value="";
-  updateFieldButtons(id,false);
-  document.getElementById("message").textContent=
-   "تم حذف "+labels[id];
- }
 }
 
 function saveAll(){
@@ -362,14 +275,26 @@ function saveAll(){
  });
 
  if(storeData(data)){
-  fields.forEach(id=>{
-   updateFieldButtons(id,data[id]!=="");
-  });
-
   document.getElementById("message").textContent=
    "تم حفظ جميع البيانات بنجاح";
 
   alert("تم حفظ جميع البيانات على هذا الجهاز");
+ }
+}
+
+function deleteField(id){
+ if(!confirm("هل تريدين حذف "+labels[id]+" فقط؟")){
+  return;
+ }
+
+ document.getElementById(id).value="";
+
+ const data=getData();
+ data[id]="";
+
+ if(storeData(data)){
+  document.getElementById("message").textContent=
+   "تم حذف "+labels[id];
  }
 }
 
