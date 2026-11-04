@@ -47,18 +47,58 @@ main{max-width:650px;margin:20px auto;padding:12px}
 footer{text-align:center;color:#777;padding:25px;font-size:13px}
 .page{display:none}
 .page.active{display:block}
-.field{margin-bottom:15px}
-.field label{display:block;margin-bottom:7px;font-weight:bold}
+.field{
+ background:white;
+ border:1px solid #e2e5dc;
+ border-radius:12px;
+ padding:13px;
+ margin-bottom:13px;
+}
+.field label{
+ display:block;
+ margin-bottom:9px;
+ font-weight:bold;
+}
 .field input{
- width:100%;padding:12px;border:1px solid #ccd4c8;
- border-radius:8px;font-size:16px;background:white;
+ width:100%;
+ padding:12px;
+ border:1px solid #ccd4c8;
+ border-radius:8px;
+ font-size:16px;
+ background:#f8f9f6;
+ color:#26372b;
+}
+.field input:not([readonly]){
+ background:white;
+ border:2px solid #405b45;
+}
+.actions{
+ display:flex;
+ gap:7px;
+ margin-top:10px;
+ flex-wrap:wrap;
 }
 .action{
- width:100%;padding:13px;border:0;border-radius:9px;
- font-size:16px;margin-top:10px;cursor:pointer;
+ padding:9px 13px;
+ border:0;
+ border-radius:8px;
+ font-size:14px;
+ cursor:pointer;
 }
-.save{background:#405b45;color:white}
-.back{background:#e5e9e1;color:#26372b}
+.edit{background:#405b45;color:white}
+.delete{background:#f4e5e3;color:#a12f2f}
+.cancel{background:#e5e9e1;color:#26372b}
+.back{
+ width:100%;
+ padding:13px;
+ border:0;
+ border-radius:9px;
+ font-size:16px;
+ margin-top:10px;
+ background:#e5e9e1;
+ color:#26372b;
+ cursor:pointer;
+}
 </style>
 </head>
 
@@ -96,41 +136,70 @@ footer{text-align:center;color:#777;padding:25px;font-size:13px}
 <div id="personal" class="page">
  <div class="intro">
   <h2>البيانات الشخصية</h2>
-  <p>يرجى إدخال المعلومات الشخصية.</p>
+  <p>يمكنك تعديل أو حذف كل معلومة بصورة مستقلة.</p>
  </div>
 
  <div class="field">
   <label>الاسم الكامل</label>
-  <input id="fullName" type="text">
+  <input id="fullName" type="text" readonly>
+  <div class="actions">
+   <button class="action edit" onclick="editField('fullName')">تعديل</button>
+   <button class="action delete" onclick="deleteField('fullName')">حذف</button>
+   <button class="action cancel" id="cancel-fullName" style="display:none" onclick="cancelEdit('fullName')">إلغاء</button>
+  </div>
  </div>
 
  <div class="field">
   <label>اسم الأم</label>
-  <input id="motherName" type="text">
+  <input id="motherName" type="text" readonly>
+  <div class="actions">
+   <button class="action edit" onclick="editField('motherName')">تعديل</button>
+   <button class="action delete" onclick="deleteField('motherName')">حذف</button>
+   <button class="action cancel" id="cancel-motherName" style="display:none" onclick="cancelEdit('motherName')">إلغاء</button>
+  </div>
  </div>
 
  <div class="field">
   <label>تاريخ الولادة</label>
-  <input id="birthDate" type="date">
+  <input id="birthDate" type="date" readonly>
+  <div class="actions">
+   <button class="action edit" onclick="editField('birthDate')">تعديل</button>
+   <button class="action delete" onclick="deleteField('birthDate')">حذف</button>
+   <button class="action cancel" id="cancel-birthDate" style="display:none" onclick="cancelEdit('birthDate')">إلغاء</button>
+  </div>
  </div>
 
  <div class="field">
   <label>مكان الولادة</label>
-  <input id="birthPlace" type="text">
+  <input id="birthPlace" type="text" readonly>
+  <div class="actions">
+   <button class="action edit" onclick="editField('birthPlace')">تعديل</button>
+   <button class="action delete" onclick="deleteField('birthPlace')">حذف</button>
+   <button class="action cancel" id="cancel-birthPlace" style="display:none" onclick="cancelEdit('birthPlace')">إلغاء</button>
+  </div>
  </div>
 
  <div class="field">
   <label>محل السكن</label>
-  <input id="residence" type="text">
+  <input id="residence" type="text" readonly>
+  <div class="actions">
+   <button class="action edit" onclick="editField('residence')">تعديل</button>
+   <button class="action delete" onclick="deleteField('residence')">حذف</button>
+   <button class="action cancel" id="cancel-residence" style="display:none" onclick="cancelEdit('residence')">إلغاء</button>
+  </div>
  </div>
 
  <div class="field">
   <label>رقم الهاتف</label>
-  <input id="phone" type="tel">
+  <input id="phone" type="tel" readonly>
+  <div class="actions">
+   <button class="action edit" onclick="editField('phone')">تعديل</button>
+   <button class="action delete" onclick="deleteField('phone')">حذف</button>
+   <button class="action cancel" id="cancel-phone" style="display:none" onclick="cancelEdit('phone')">إلغاء</button>
+  </div>
  </div>
 
- <button class="action save" onclick="savePersonal()">حفظ البيانات</button>
- <button class="action back" onclick="goHome()">رجوع إلى الصفحة الرئيسية</button>
+ <button class="back" onclick="goHome()">رجوع إلى الصفحة الرئيسية</button>
 </div>
 
 </main>
@@ -138,6 +207,15 @@ footer{text-align:center;color:#777;padding:25px;font-size:13px}
 <footer>إضبارتي الوظيفية © 2026</footer>
 
 <script>
+const fields = [
+ "fullName",
+ "motherName",
+ "birthDate",
+ "birthPlace",
+ "residence",
+ "phone"
+];
+
 function openPersonal(){
  document.getElementById("home").classList.remove("active");
  document.getElementById("personal").classList.add("active");
@@ -151,37 +229,97 @@ function goHome(){
  window.scrollTo(0,0);
 }
 
-function savePersonal(){
- const data={
-  fullName:document.getElementById("fullName").value,
-  motherName:document.getElementById("motherName").value,
-  birthDate:document.getElementById("birthDate").value,
-  birthPlace:document.getElementById("birthPlace").value,
-  residence:document.getElementById("residence").value,
-  phone:document.getElementById("phone").value
- };
+function getData(){
+ try{
+  return JSON.parse(localStorage.getItem("personalData")) || {};
+ }catch(error){
+  return {};
+ }
+}
 
+function storeData(data){
  try{
   localStorage.setItem("personalData",JSON.stringify(data));
-  alert("تم حفظ البيانات على هذا الجهاز");
+  return true;
  }catch(error){
-  alert("تعذر حفظ البيانات");
+  alert("تعذر حفظ البيانات على هذا الجهاز");
+  return false;
  }
 }
 
 function loadPersonal(){
- const saved=localStorage.getItem("personalData");
- if(!saved)return;
+ const data=getData();
 
- try{
-  const data=JSON.parse(saved);
-  document.getElementById("fullName").value=data.fullName||"";
-  document.getElementById("motherName").value=data.motherName||"";
-  document.getElementById("birthDate").value=data.birthDate||"";
-  document.getElementById("birthPlace").value=data.birthPlace||"";
-  document.getElementById("residence").value=data.residence||"";
-  document.getElementById("phone").value=data.phone||"";
- }catch(error){}
+ fields.forEach(id=>{
+  const input=document.getElementById(id);
+  input.value=data[id] || "";
+  input.readOnly=true;
+
+  const buttons=input.parentElement.querySelectorAll("button");
+  buttons[0].textContent="تعديل";
+  document.getElementById("cancel-"+id).style.display="none";
+ });
+}
+
+function editField(id){
+ const input=document.getElementById(id);
+ const buttons=input.parentElement.querySelectorAll("button");
+
+ if(input.readOnly){
+  input.dataset.original=input.value;
+  input.readOnly=false;
+  buttons[0].textContent="حفظ";
+  document.getElementById("cancel-"+id).style.display="inline-block";
+  input.focus();
+ }else{
+  const data=getData();
+  data[id]=input.value;
+
+  if(storeData(data)){
+   input.readOnly=true;
+   buttons[0].textContent="تعديل";
+   document.getElementById("cancel-"+id).style.display="none";
+   alert("تم حفظ التعديل");
+  }
+ }
+}
+
+function cancelEdit(id){
+ const input=document.getElementById(id);
+ const buttons=input.parentElement.querySelectorAll("button");
+
+ input.value=input.dataset.original || "";
+ input.readOnly=true;
+ buttons[0].textContent="تعديل";
+ document.getElementById("cancel-"+id).style.display="none";
+}
+
+function deleteField(id){
+ const labels={
+  fullName:"الاسم الكامل",
+  motherName:"اسم الأم",
+  birthDate:"تاريخ الولادة",
+  birthPlace:"مكان الولادة",
+  residence:"محل السكن",
+  phone:"رقم الهاتف"
+ };
+
+ if(!confirm("هل تريدين حذف "+labels[id]+" فقط؟"))return;
+
+ const data=getData();
+ delete data[id];
+
+ if(storeData(data)){
+  const input=document.getElementById(id);
+  input.value="";
+  input.readOnly=true;
+
+  const buttons=input.parentElement.querySelectorAll("button");
+  buttons[0].textContent="تعديل";
+  document.getElementById("cancel-"+id).style.display="none";
+
+  alert("تم حذف المعلومة");
+ }
 }
 
 if("serviceWorker" in navigator){
