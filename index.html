@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#405b45">
- <link rel="manifest" href="./manifest.json">
+<link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="./app-icon-512.png">
 <title>إضبارتي الوظيفية</title>
+
 <style>
 *{box-sizing:border-box}
 body{
@@ -41,41 +42,154 @@ main{max-width:650px;margin:20px auto;padding:12px}
  font-size:16px;
 }
 .item span{display:block;font-size:25px;margin-bottom:10px}
+.clickable{cursor:pointer}
+.clickable:active{background:#e9eee6}
 footer{text-align:center;color:#777;padding:25px;font-size:13px}
+.page{display:none}
+.page.active{display:block}
+.field{margin-bottom:15px}
+.field label{display:block;margin-bottom:7px;font-weight:bold}
+.field input{
+ width:100%;padding:12px;border:1px solid #ccd4c8;
+ border-radius:8px;font-size:16px;background:white;
+}
+.action{
+ width:100%;padding:13px;border:0;border-radius:9px;
+ font-size:16px;margin-top:10px;cursor:pointer;
+}
+.save{background:#405b45;color:white}
+.back{background:#e5e9e1;color:#26372b}
 </style>
 </head>
+
 <body>
+
 <header>
 <h1>إضبارتي الوظيفية</h1>
 <p>ملفك الوظيفي الإلكتروني</p>
 </header>
+
 <main>
-<div class="intro">
-<h2>مرحباً بك</h2>
-<p>احتفظ ببياناتك الوظيفية ووثائقك في مكان واحد.</p>
+
+<div id="home" class="page active">
+ <div class="intro">
+  <h2>مرحباً بك</h2>
+  <p>احتفظ ببياناتك الوظيفية ووثائقك في مكان واحد.</p>
+ </div>
+
+ <div class="sections">
+  <div class="item clickable" onclick="openPersonal()">
+   <span>👤</span>البيانات الشخصية
+  </div>
+  <div class="item"><span>🏢</span>البيانات الوظيفية</div>
+  <div class="item"><span>📈</span>الترفيعات</div>
+  <div class="item"><span>💰</span>العلاوات</div>
+  <div class="item"><span>📜</span>كتب الشكر والتقدير</div>
+  <div class="item"><span>🗓️</span>الإجازات</div>
+  <div class="item"><span>🎓</span>الدورات والشهادات</div>
+  <div class="item"><span>📂</span>الكتب الرسمية</div>
+  <div class="item"><span>🪪</span>المستمسكات والوثائق</div>
+  <div class="item"><span>🔔</span>التنبيهات والاستحقاقات</div>
+ </div>
 </div>
-<div class="sections">
-<div class="item"><span>👤</span>البيانات الشخصية</div>
-<div class="item"><span>🏢</span>البيانات الوظيفية</div>
-<div class="item"><span>📈</span>الترفيعات</div>
-<div class="item"><span>💰</span>العلاوات</div>
-<div class="item"><span>📜</span>كتب الشكر والتقدير</div>
-<div class="item"><span>🗓️</span>الإجازات</div>
-<div class="item"><span>🎓</span>الدورات والشهادات</div>
-<div class="item"><span>📂</span>الكتب الرسمية</div>
-<div class="item"><span>🪪</span>المستمسكات والوثائق</div>
-<div class="item"><span>🔔</span>التنبيهات والاستحقاقات</div>
+
+<div id="personal" class="page">
+ <div class="intro">
+  <h2>البيانات الشخصية</h2>
+  <p>يرجى إدخال المعلومات الشخصية.</p>
+ </div>
+
+ <div class="field">
+  <label>الاسم الكامل</label>
+  <input id="fullName" type="text">
+ </div>
+
+ <div class="field">
+  <label>اسم الأم</label>
+  <input id="motherName" type="text">
+ </div>
+
+ <div class="field">
+  <label>تاريخ الولادة</label>
+  <input id="birthDate" type="date">
+ </div>
+
+ <div class="field">
+  <label>مكان الولادة</label>
+  <input id="birthPlace" type="text">
+ </div>
+
+ <div class="field">
+  <label>محل السكن</label>
+  <input id="residence" type="text">
+ </div>
+
+ <div class="field">
+  <label>رقم الهاتف</label>
+  <input id="phone" type="tel">
+ </div>
+
+ <button class="action save" onclick="savePersonal()">حفظ البيانات</button>
+ <button class="action back" onclick="goHome()">رجوع إلى الصفحة الرئيسية</button>
 </div>
+
 </main>
-<footer>
-إضبارتي الوظيفية © 2026
-</footer>
- <script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js");
-  });
+
+<footer>إضبارتي الوظيفية © 2026</footer>
+
+<script>
+function openPersonal(){
+ document.getElementById("home").classList.remove("active");
+ document.getElementById("personal").classList.add("active");
+ loadPersonal();
+ window.scrollTo(0,0);
+}
+
+function goHome(){
+ document.getElementById("personal").classList.remove("active");
+ document.getElementById("home").classList.add("active");
+ window.scrollTo(0,0);
+}
+
+function savePersonal(){
+ const data={
+  fullName:document.getElementById("fullName").value,
+  motherName:document.getElementById("motherName").value,
+  birthDate:document.getElementById("birthDate").value,
+  birthPlace:document.getElementById("birthPlace").value,
+  residence:document.getElementById("residence").value,
+  phone:document.getElementById("phone").value
+ };
+
+ try{
+  localStorage.setItem("personalData",JSON.stringify(data));
+  alert("تم حفظ البيانات على هذا الجهاز");
+ }catch(error){
+  alert("تعذر حفظ البيانات");
+ }
+}
+
+function loadPersonal(){
+ const saved=localStorage.getItem("personalData");
+ if(!saved)return;
+
+ try{
+  const data=JSON.parse(saved);
+  document.getElementById("fullName").value=data.fullName||"";
+  document.getElementById("motherName").value=data.motherName||"";
+  document.getElementById("birthDate").value=data.birthDate||"";
+  document.getElementById("birthPlace").value=data.birthPlace||"";
+  document.getElementById("residence").value=data.residence||"";
+  document.getElementById("phone").value=data.phone||"";
+ }catch(error){}
+}
+
+if("serviceWorker" in navigator){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register("./service-worker.js");
+ });
 }
 </script>
+
 </body>
 </html>
