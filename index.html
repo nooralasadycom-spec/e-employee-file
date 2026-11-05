@@ -12,20 +12,20 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f5f5ef;color:#26372b}
 header{
- background:#405b45;
- color:#fff;
- padding:18px 15px;
+ background:#fff;
+ padding:16px 15px;
  text-align:center;
+ border-bottom:1px solid #e2e5dc;
 }
 header img{
- width:180px;
- max-width:70%;
+ width:190px;
+ max-width:75%;
  height:auto;
  display:block;
  margin:0 auto;
- background:#fff;
- border-radius:14px;
- padding:8px;
+ background:transparent;
+ border-radius:0;
+ padding:0;
 }
 header h1,header p{display:none}
 header h1{margin:5px;font-size:25px}
@@ -546,9 +546,13 @@ async function submitPin(){
    "رقم PIN غير صحيح أو تعذر حفظ/فتح بيانات الإضبارة. لم يتم تأكيد العملية.";
  }
 }
- function showPage(id){
+function showPage(id){
  document.querySelectorAll(".page").forEach(page=>page.classList.remove("active"));
  $(id).classList.add("active");
+
+ const header=document.querySelector("header");
+ header.style.display=(id==="home")?"block":"none";
+
  window.scrollTo(0,0);
 }
 
