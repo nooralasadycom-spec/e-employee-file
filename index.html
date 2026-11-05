@@ -167,7 +167,38 @@ function fileData(f){return new Promise((res,rej)=>{const r=new FileReader();r.o
 function editRecord(id){editingId=id;addingRecord=false;renderRecords();$("recordEditor").classList.remove("hidden");window.scrollTo(0,0)}
 function cancelEdit(){editingId=null;addingRecord=false;renderRecords()}
 async function deleteRecord(id){if(!confirm("تأكيد حذف هذا السجل؟"))return;state.records[activeType]=state.records[activeType].filter(x=>x.id!==id);await persist();renderRecords()}
-function downloadDoc(id){const r=(state.records[activeType]||[]).find(x=>x.id===id);if(!r?.fileData)return;const a=document.createElement("a");a.href=r.fileData;a.download=r.fileName||"document";a.click()}
+function downloadDoc(id){
+ const r=(state.records[activeType]||[]).find(x=>x.id===id);
+ if(!r?.fileData)return;
+
+ try{
+  const parts=r.fileData.split(",");
+  const mime=parts[0].match(/data:([^;]+)/)?.[1]||"application/octet-stream";
+  const binary=atob(parts[1]);
+  const bytes=new Uint8Array(binary.length);
+
+  for(let i=0;i<binary.length;i++){
+   bytes[i]=binary.charCodeAt(i);
+  }
+
+  const blob=new Blob([bytes],{type:mime});
+  const url=URL.createObjectURL(blob);
+  const opened=window.open(url,"_blank");
+
+  if(!opened){
+   const a=document.createElement("a");
+   a.href=url;
+   a.download=r.fileName||"document";
+   document.body.appendChild(a);
+   a.click();
+   a.remove();
+  }
+
+  setTimeout(()=>URL.revokeObjectURL(url),300000);
+ }catch(e){
+  alert("تعذر فتح المرفق. حاولي مرة أخرى.");
+ }
+}
 function addMonths(s,n){if(!s)return null;const d=new Date(s+"T12:00:00");if(isNaN(d))return null;const day=d.getDate();d.setMonth(d.getMonth()+n);if(d.getDate()<day)d.setDate(0);return d}
 function fmt(d){return d?d.toLocaleDateString("ar-IQ"):"غير محدد"}
 function renderAlerts(){const j=state.job,today=new Date();let html="";function item(title,d){if(!d)return `<div class="record"><b>${title}</b><p>أدخلي تاريخ آخر إجراء أو تاريخ التعيين في البيانات الوظيفية.</p></div>`;const days=Math.ceil((d-today)/86400000);const msg=days<0?"موعد الاستحقاق قد حلّ أو تجاوز التاريخ.":days<=60?`متبقي ${days} يوم تقريباً.`:"لم يحن موعد الاستحقاق بعد.";return `<div class="record"><b>${title}</b><p>التاريخ المتوقع: ${fmt(d)}</p><p>${msg}</p></div>`}
