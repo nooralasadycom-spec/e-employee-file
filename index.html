@@ -9,35 +9,96 @@
 <link rel="apple-touch-icon" href="./app-icon-512.png">
 <title>إضبارتي الوظيفية</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5ef;color:#26372b}
-header{background:#405b45;color:#fff;padding:23px 15px;text-align:center}header h1{margin:5px;font-size:25px}header p{margin:8px 0 0;color:#e5eadf}
-main{max-width:760px;margin:18px auto;padding:12px}.intro,.field,.panel,.record{background:#fff;border:1px solid #e2e5dc;border-radius:13px;padding:16px;margin-bottom:13px}
-.intro{text-align:center}.sections{display:grid;grid-template-columns:1fr 1fr;gap:11px}.item{background:#fff;border:1px solid #e2e5dc;border-radius:12px;padding:18px 9px;text-align:center;font-size:15px;cursor:pointer}.item span{display:block;font-size:24px;margin-bottom:8px}.item:active{background:#e9eee6}
-.page{display:none}.page.active{display:block}label{display:block;font-weight:bold;margin:10px 0 7px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ccd4c8;border-radius:8px;font-size:16px;background:#fff;color:#26372b}textarea{min-height:85px;resize:vertical}
-button{padding:11px 15px;border:0;border-radius:8px;font-size:15px;cursor:pointer}.primary{background:#405b45;color:#fff}.secondary{background:#e5e9e1;color:#26372b}.danger{background:#f4e5e3;color:#a12f2f}.small{font-size:13px;padding:8px 11px}
-.actions,.top-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.back{width:100%;margin-top:10px;background:#e5e9e1;color:#26372b}.message{text-align:center;padding:10px;color:#405b45;font-weight:bold}.hidden{display:none!important}.note{font-size:13px;color:#68766b;line-height:1.7}
-.record h3{margin:0 0 8px}.record p{margin:5px 0;line-height:1.6;overflow-wrap:anywhere}.photo{width:115px;height:115px;object-fit:cover;border-radius:50%;border:3px solid #dce5d8;display:block;margin:10px auto}
-.profile-sheet{background:#fff;border:1px solid #d9dfd5;border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(35,55,40,.05)}.profile-head{display:flex;align-items:center;gap:16px;padding-bottom:16px;margin-bottom:14px;border-bottom:2px solid #405b45}.profile-head .photo{width:105px;height:105px;margin:0;flex:0 0 105px}.profile-head h3{margin:0 0 8px;color:#405b45;font-size:19px}.profile-head p{margin:4px 0;color:#667267;font-size:14px}.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.profile-row{padding:12px 8px;border-bottom:1px solid #edf0e9;min-width:0}.profile-row b{display:block;color:#617062;font-size:13px;margin-bottom:6px}.profile-row span{display:block;color:#26372b;font-size:15px;overflow-wrap:anywhere;line-height:1.6}.profile-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.profile-actions button{flex:1}@media(max-width:480px){.profile-grid{grid-template-columns:1fr}.profile-head .photo{width:88px;height:88px;flex-basis:88px}}
-footer{text-align:center;color:#777;padding:20px;font-size:13px}hr{border:0;border-top:1px solid #e5e9e1;margin:16px 0}
-@media print{header,.no-print,footer,button{display:none!important}body{background:white}main{max-width:none;margin:0;padding:0}.page{display:none!important}.page.active{display:block!important}.record,.field,.panel{break-inside:avoid;border:1px solid #aaa}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f5ef;color:#26372b}
+header{background:#405b45;color:#fff;padding:23px 15px;text-align:center}
+header h1{margin:5px;font-size:25px}
+header p{margin:8px 0 0;color:#e5eadf}
+main{max-width:760px;margin:18px auto;padding:12px}
+.intro,.field,.panel,.record{background:#fff;border:1px solid #e2e5dc;border-radius:13px;padding:16px;margin-bottom:13px}
+.intro{text-align:center}
+.sections{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.item{background:#fff;border:1px solid #e2e5dc;border-radius:12px;padding:18px 9px;text-align:center;font-size:15px;cursor:pointer}
+.item span{display:block;font-size:24px;margin-bottom:8px}
+.item:active{background:#e9eee6}
+.page{display:none}
+.page.active{display:block}
+label{display:block;font-weight:bold;margin:10px 0 7px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd4c8;border-radius:8px;font-size:16px;background:#fff;color:#26372b}
+textarea{min-height:85px;resize:vertical}
+button{padding:11px 15px;border:0;border-radius:8px;font-size:15px;cursor:pointer}
+.primary{background:#405b45;color:#fff}
+.secondary{background:#e5e9e1;color:#26372b}
+.danger{background:#f4e5e3;color:#a12f2f}
+.small{font-size:13px;padding:8px 11px}
+.actions,.top-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.back{width:100%;margin-top:10px;background:#e5e9e1;color:#26372b}
+.message{text-align:center;padding:10px;color:#405b45;font-weight:bold}
+.hidden{display:none!important}
+.note{font-size:13px;color:#68766b;line-height:1.7}
+.record h3{margin:0 0 8px}
+.record p{margin:5px 0;line-height:1.6;overflow-wrap:anywhere}
+.photo{width:115px;height:115px;object-fit:cover;border-radius:50%;border:3px solid #dce5d8;display:block;margin:10px auto}
+.profile-sheet{background:#fff;border:1px solid #d9dfd5;border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(35,55,40,.05)}
+.profile-head{display:flex;align-items:center;gap:16px;padding-bottom:16px;margin-bottom:14px;border-bottom:2px solid #405b45}
+.profile-head .photo{width:105px;height:105px;margin:0;flex:0 0 105px}
+.profile-head h3{margin:0 0 8px;color:#405b45;font-size:19px}
+.profile-head p{margin:4px 0;color:#667267;font-size:14px}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.profile-row{padding:12px 8px;border-bottom:1px solid #edf0e9;min-width:0}
+.profile-row b{display:block;color:#617062;font-size:13px;margin-bottom:6px}
+.profile-row span{display:block;color:#26372b;font-size:15px;overflow-wrap:anywhere;line-height:1.6}
+.profile-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.profile-actions button{flex:1}
+@media(max-width:480px){
+ .profile-grid{grid-template-columns:1fr}
+ .profile-head .photo{width:88px;height:88px;flex-basis:88px}
+}
+footer{text-align:center;color:#777;padding:20px;font-size:13px}
+hr{border:0;border-top:1px solid #e5e9e1;margin:16px 0}
+@media print{
+ header,.no-print,footer,button{display:none!important}
+ body{background:white}
+ main{max-width:none;margin:0;padding:0}
+ .page{display:none!important}
+ .page.active{display:block!important}
+ .record,.field,.panel,.profile-sheet{break-inside:avoid;border:1px solid #aaa;box-shadow:none}
+}
 </style>
 </head>
 <body>
-<header><h1>إضبارتي الوظيفية</h1><p>ملفك الوظيفي الإلكتروني</p></header>
+<header>
+ <h1>إضبارتي الوظيفية</h1>
+ <p>ملفك الوظيفي الإلكتروني</p>
+</header>
 <main>
+
 <section id="lock" class="page active">
- <div class="intro"><h2 id="lockTitle">حماية الإضبارة</h2><p id="lockInfo">أنشئي رقم PIN من 6 أرقام لحماية بياناتك على هذا الجهاز.</p></div>
+ <div class="intro">
+  <h2 id="lockTitle">حماية الإضبارة</h2>
+  <p id="lockInfo">أنشئي رقم PIN من 6 أرقام لحماية بياناتك على هذا الجهاز.</p>
+ </div>
  <div class="field">
-  <label for="pin">رقم PIN (6 أرقام)</label><input id="pin" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="••••••">
-  <div id="confirmWrap"><label for="pin2">تأكيد رقم PIN</label><input id="pin2" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="••••••"></div>
-  <div class="actions"><button class="primary" onclick="submitPin()">متابعة</button></div><div id="lockMessage" class="message"></div>
+  <label for="pin">رقم PIN (6 أرقام)</label>
+  <input id="pin" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="••••••">
+  <div id="confirmWrap">
+   <label for="pin2">تأكيد رقم PIN</label>
+   <input id="pin2" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="••••••">
+  </div>
+  <div class="actions">
+   <button class="primary" onclick="submitPin()">متابعة</button>
+  </div>
+  <div id="lockMessage" class="message"></div>
   <p class="note">تُشفّر الإضبارة على هذا الجهاز. احفظي نسخة احتياطية مشفّرة بمكان آمن. إذا نُسي PIN وفُقدت النسخة الاحتياطية، لا يمكن استرجاع البيانات.</p>
  </div>
 </section>
 
 <section id="home" class="page">
- <div class="intro"><div id="homePhoto"></div><h2>مرحباً بك في إضبارتك</h2><p>بياناتك محفوظة محلياً على هذا الجهاز.</p></div>
+ <div class="intro">
+  <div id="homePhoto"></div>
+  <h2>مرحباً بك في إضبارتك</h2>
+  <p>بياناتك محفوظة محلياً على هذا الجهاز.</p>
+ </div>
  <div class="sections">
   <div class="item" onclick="openSection('personal')"><span>👤</span>البيانات الشخصية</div>
   <div class="item" onclick="openSection('job')"><span>🏢</span>البيانات الوظيفية</div>
@@ -50,22 +111,38 @@ footer{text-align:center;color:#777;padding:20px;font-size:13px}hr{border:0;bord
   <div class="item" onclick="openSection('documents')"><span>🪪</span>المستمسكات والوثائق</div>
   <div class="item" onclick="openSection('alerts')"><span>🔔</span>التنبيهات والاستحقاقات</div>
  </div>
- <div class="panel no-print"><h3>إدارة الإضبارة</h3><div class="top-actions">
-  <button class="primary" onclick="exportBackup()">إنشاء نسخة احتياطية مشفّرة</button>
-  <button class="secondary" onclick="$('backupFile').click()">استعادة نسخة احتياطية</button>
-  <button class="secondary" onclick="printDossier()">طباعة الإضبارة</button>
-  <button class="secondary" onclick="lockApp()">قفل الإضبارة</button>
- </div><input id="backupFile" class="hidden" type="file" accept=".eefile,.json,application/json" onchange="importBackup(event)">
- <p class="note">النسخة الاحتياطية مشفّرة وتحتاج PIN الذي أُنشئت به. انقلي الملف إلى Files أو USB واحفظيه بمكان آمن.</p></div>
+ <div class="panel no-print">
+  <h3>إدارة الإضبارة</h3>
+  <div class="top-actions">
+   <button class="primary" onclick="exportBackup()">إنشاء نسخة احتياطية مشفّرة</button>
+   <button class="secondary" onclick="$('backupFile').click()">استعادة نسخة احتياطية</button>
+   <button class="secondary" onclick="printDossier()">طباعة الإضبارة</button>
+   <button class="secondary" onclick="lockApp()">قفل الإضبارة</button>
+  </div>
+  <input id="backupFile" class="hidden" type="file" accept=".eefile,.json,application/json" onchange="importBackup(event)">
+  <p class="note">النسخة الاحتياطية مشفّرة وتحتاج PIN الذي أُنشئت به. انقلي الملف إلى Files أو USB واحفظيه بمكان آمن.</p>
+ </div>
 </section>
 
 <section id="personal" class="page">
  <div class="intro"><h2>الإضبارة الشخصية</h2><p>بيانات الموظف الشخصية</p></div>
  <div id="personalView" class="profile-sheet"></div>
- <div id="personalViewActions" class="profile-actions no-print"><button class="primary" onclick="startEditPersonal()">تعديل البيانات</button><button class="secondary" onclick="window.print()">طباعة</button></div>
+ <div id="personalViewActions" class="profile-actions no-print">
+  <button class="primary" onclick="startEditPersonal()">تعديل البيانات</button>
+  <button class="secondary" onclick="window.print()">طباعة</button>
+ </div>
  <div id="personalEdit" class="hidden">
-  <div class="field"><img id="photoPreview" class="photo hidden" alt="الصورة الشخصية"><label>الصورة الشخصية</label><input id="photoInput" type="file" accept="image/*" onchange="loadPhoto(event)"><button class="danger small" onclick="removePhoto()">حذف الصورة</button></div>
-  <div class="field" id="personalFields"></div><div class="actions no-print"><button class="primary" onclick="savePersonal()">حفظ البيانات</button><button class="secondary" onclick="cancelEditPersonal()">إلغاء</button></div>
+  <div class="field">
+   <img id="photoPreview" class="photo hidden" alt="الصورة الشخصية">
+   <label>الصورة الشخصية</label>
+   <input id="photoInput" type="file" accept="image/*" onchange="loadPhoto(event)">
+   <button class="danger small" onclick="removePhoto()">حذف الصورة</button>
+  </div>
+  <div class="field" id="personalFields"></div>
+  <div class="actions no-print">
+   <button class="primary" onclick="savePersonal()">حفظ البيانات</button>
+   <button class="secondary" onclick="cancelEditPersonal()">إلغاء</button>
+  </div>
  </div>
  <button class="back no-print" onclick="goHome()">رجوع</button>
 </section>
@@ -73,145 +150,1240 @@ footer{text-align:center;color:#777;padding:20px;font-size:13px}hr{border:0;bord
 <section id="job" class="page">
  <div class="intro"><h2>الإضبارة الوظيفية</h2><p>بيانات التعيين والملاك والعنوان الوظيفي</p></div>
  <div id="jobView" class="profile-sheet"></div>
- <div class="profile-actions no-print"><button class="primary" onclick="startEditJob()">تعديل البيانات</button><button class="secondary" onclick="window.print()">طباعة</button></div>
- <div id="jobEditor" class="hidden"><div class="field" id="jobFields"></div><div class="actions no-print"><button class="primary" onclick="saveJob()">حفظ البيانات</button><button class="secondary" onclick="cancelEditJob()">إلغاء</button></div></div>
+ <div class="profile-actions no-print">
+  <button class="primary" onclick="startEditJob()">تعديل البيانات</button>
+  <button class="secondary" onclick="window.print()">طباعة</button>
+ </div>
+ <div id="jobEditor" class="hidden">
+  <div class="field" id="jobFields"></div>
+  <div class="actions no-print">
+   <button class="primary" onclick="saveJob()">حفظ البيانات</button>
+   <button class="secondary" onclick="cancelEditJob()">إلغاء</button>
+  </div>
+ </div>
  <button class="back no-print" onclick="goHome()">رجوع</button>
 </section>
 
 <section id="records" class="page">
  <div class="intro"><h2 id="recordsTitle"></h2><p id="recordsDesc"></p></div>
- <div class="profile-actions no-print"><button class="primary" onclick="startAddRecord()">＋ إضافة سجل</button><button class="secondary" onclick="window.print()">طباعة</button></div>
- <div id="recordEditor" class="hidden"><div class="field" id="recordForm"></div><div class="actions no-print"><button class="primary" onclick="saveRecord()">حفظ السجل</button><button class="secondary" onclick="cancelEdit()">إلغاء</button></div></div>
- <div id="recordList"></div><button class="back no-print" onclick="goHome()">رجوع</button>
+ <div class="profile-actions no-print">
+  <button class="primary" onclick="startAddRecord()">＋ إضافة سجل</button>
+  <button class="secondary" onclick="window.print()">طباعة</button>
+ </div>
+ <div id="recordEditor" class="hidden">
+  <div class="field" id="recordForm"></div>
+  <div class="actions no-print">
+   <button class="primary" onclick="saveRecord()">حفظ السجل</button>
+   <button class="secondary" onclick="cancelEdit()">إلغاء</button>
+  </div>
+ </div>
+ <div id="recordList"></div>
+ <button class="back no-print" onclick="goHome()">رجوع</button>
 </section>
 
 <section id="alerts" class="page">
- <div class="intro"><h2>التنبيهات والاستحقاقات</h2><p>حسابات تقديرية حسب التواريخ المسجلة، ويجب تدقيقها مع شعبة الموارد البشرية.</p></div>
- <div id="alertsContent"></div><button class="secondary no-print" onclick="window.print()">طباعة التنبيهات</button><button class="back no-print" onclick="goHome()">رجوع</button>
+ <div class="intro">
+  <h2>التنبيهات والاستحقاقات</h2>
+  <p>حسابات تقديرية حسب التواريخ المسجلة، ويجب تدقيقها مع شعبة الموارد البشرية.</p>
+ </div>
+ <div id="alertsContent"></div>
+ <button class="secondary no-print" onclick="window.print()">طباعة التنبيهات</button>
+ <button class="back no-print" onclick="goHome()">رجوع</button>
 </section>
 
 <section id="printDossier" class="page">
- <div class="intro"><h2>الإضبارة الوظيفية</h2><p>نسخة للطباعة</p></div><div id="printContent"></div>
+ <div class="intro"><h2>الإضبارة الوظيفية</h2><p>نسخة للطباعة</p></div>
+ <div id="printContent"></div>
 </section>
+
 </main>
 <footer>إضبارتي الوظيفية © 2026</footer>
-
 <script>
 "use strict";
-const DB_NAME="EmployeeFileLocalDB",STORE="vault",VAULT_KEY="main";
-let db,vaultMeta=null,cryptoKey=null,state=null,activeType="",editingId=null,pendingPhoto=null;
-const $=id=>document.getElementById(id);
-const personalDefs=[["fullName","الاسم الكامل","text"],["motherName","اسم الأم","text"],["birthDate","تاريخ الولادة","date"],["birthPlace","مكان الولادة","text"],["residence","محل السكن","text"],["phone","رقم الهاتف","tel"]];
-const jobDefs=[["jobTitle","العنوان الوظيفي","text"],["grade","الدرجة","text"],["stage","المرحلة","text"],["department","الدائرة / جهة العمل","text"],["workplace","مكان العمل","text"],["appointmentDate","تاريخ التعيين","date"],["lastPromotionDate","تاريخ آخر ترفيع","date"],["lastAllowanceDate","تاريخ آخر علاوة","date"],["certificate","التحصيل الدراسي","text"],["specialization","الاختصاص","text"],["employeeNumber","الرقم الوظيفي","text"]];
-const configs={
- promotions:{title:"الترفيعات",desc:"سجلي قرارات الترفيع وتواريخها وارفقي كتاب PDF أو صورة (حتى 20 ميغابايت).",fields:[["date","تاريخ الترفيع","date"],["grade","الدرجة","text"],["stage","المرحلة","text"],["bookNumber","رقم الكتاب","text"],["bookDate","تاريخ الكتاب","date"],["notes","ملاحظات","textarea"],["file","إرفاق كتاب PDF أو صورة","file"]]},
- allowances:{title:"العلاوات",desc:"سجلي العلاوات وتواريخها وارفقي كتاب PDF أو صورة (حتى 20 ميغابايت).",fields:[["date","تاريخ العلاوة","date"],["grade","الدرجة","text"],["stage","المرحلة","text"],["bookNumber","رقم الكتاب","text"],["bookDate","تاريخ الكتاب","date"],["notes","ملاحظات","textarea"],["file","إرفاق كتاب PDF أو صورة","file"]]},
- thanks:{title:"كتب الشكر والتقدير",desc:"تُحفظ جميع الكتب. الحد الأقصى للاحتساب 3 كتب في السنة. ارفقي كتاب PDF أو صورة (حتى 20 ميغابايت). القدم: رئيس الوزراء 6 أشهر، الوزير شهر، المدير العام شهر.",fields:[["date","تاريخ الكتاب","date"],["issuer","جهة إصدار الكتاب","select","رئيس الوزراء|الوزير|المدير العام|جهة أخرى"],["bookNumber","رقم الكتاب","text"],["seniority","أشهر القدم","number"],["notes","ملاحظات","textarea"],["file","إرفاق كتاب PDF أو صورة","file"]]},
- leaves:{title:"الإجازات",desc:"سجل الإجازات ومددها، ويمكن إرفاق كتاب PDF أو صورة (حتى 20 ميغابايت).",fields:[["type","نوع الإجازة","text"],["startDate","من تاريخ","date"],["endDate","إلى تاريخ","date"],["days","عدد الأيام","number"],["bookNumber","رقم الكتاب","text"],["notes","ملاحظات","textarea"],["file","إرفاق كتاب PDF أو صورة","file"]]},
- courses:{title:"الدورات والشهادات",desc:"سجل الدورات التدريبية والشهادات، ويمكن إرفاق الشهادة PDF أو صورة (حتى 20 ميغابايت).",fields:[["name","اسم الدورة / الشهادة","text"],["provider","الجهة المنظمة","text"],["startDate","تاريخ البدء","date"],["endDate","تاريخ الانتهاء","date"],["hours","عدد الساعات","number"],["notes","ملاحظات","textarea"],["file","إرفاق شهادة PDF أو صورة","file"]]},
- letters:{title:"الكتب الرسمية",desc:"فهرسة الكتب الرسمية الواردة والصادرة مع إمكانية إرفاق PDF أو صورة (حتى 20 ميغابايت).",fields:[["direction","نوع الكتاب","select","وارد|صادر"],["date","تاريخ الكتاب","date"],["number","رقم الكتاب","text"],["subject","الموضوع","text"],["recipient","الجهة","text"],["notes","ملاحظات","textarea"],["file","إرفاق كتاب PDF أو صورة","file"]]},
- documents:{title:"المستمسكات والوثائق",desc:"إرفاق صور أو ملفات PDF. الحد الأقصى 20 ميغابايت للملف الواحد.",fields:[["name","اسم الوثيقة","text"],["number","رقم الوثيقة","text"],["date","تاريخ الوثيقة","date"],["notes","ملاحظات","textarea"],["file","اختيار ملف","file"]]}
-};
-function openDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open(DB_NAME,1);r.onupgradeneeded=()=>r.result.createObjectStore(STORE);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
-function dbGet(){return new Promise((resolve,reject)=>{const r=db.transaction(STORE).objectStore(STORE).get(VAULT_KEY);r.onsuccess=()=>resolve(r.result||null);r.onerror=()=>reject(r.error)})}
-function dbPut(v){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,"readwrite");tx.objectStore(STORE).put(v,VAULT_KEY);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
-function b64(bytes){let s="";new Uint8Array(bytes).forEach(x=>s+=String.fromCharCode(x));return btoa(s)}
-function unb64(s){return Uint8Array.from(atob(s),c=>c.charCodeAt(0))}
-async function deriveKey(pin,salt){const raw=await crypto.subtle.importKey("raw",new TextEncoder().encode(pin),"PBKDF2",false,["deriveKey"]);return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:310000,hash:"SHA-256"},raw,{name:"AES-GCM",length:256},false,["encrypt","decrypt"])}
-async function encryptData(data,key){const iv=crypto.getRandomValues(new Uint8Array(12));const plain=new TextEncoder().encode(JSON.stringify(data));const cipher=await crypto.subtle.encrypt({name:"AES-GCM",iv},key,plain);return {version:1,iv:b64(iv),cipher:b64(cipher)}}
-async function decryptData(meta,key){const plain=await crypto.subtle.decrypt({name:"AES-GCM",iv:unb64(meta.iv)},key,unb64(meta.cipher));return JSON.parse(new TextDecoder().decode(plain))}
-function blankState(){return {personal:{},job:{},photo:"",records:{promotions:[],allowances:[],thanks:[],leaves:[],courses:[],letters:[],documents:[]}}}
-async function persist(){const enc=await encryptData(state,cryptoKey);await dbPut({salt:vaultMeta.salt,...enc})}
-async function init(){try{if(!window.crypto||!crypto.subtle||!window.indexedDB)throw Error("secure");db=await openDB();vaultMeta=await dbGet();if(vaultMeta){$("lockTitle").textContent="فتح الإضبارة";$("lockInfo").textContent="أدخلي رقم PIN لفتح بياناتك.";$("confirmWrap").classList.add("hidden")}else{$("lockTitle").textContent="إنشاء حماية الإضبارة";$("lockInfo").textContent="اختاري رقم PIN من 6 أرقام لهذه الإضبارة."}}catch(e){$("lockMessage").textContent="تعذر تهيئة التخزين الآمن. افتحي رابط التطبيق عبر HTTPS في متصفح حديث."}}
-async function submitPin(){const pin=$("pin").value;if(!/^\d{6}$/.test(pin)){$("lockMessage").textContent="أدخلي 6 أرقام بالضبط.";return}try{if(!vaultMeta){if(pin!==$("pin2").value){$("lockMessage").textContent="رقما PIN غير متطابقين.";return}const salt=crypto.getRandomValues(new Uint8Array(16));cryptoKey=await deriveKey(pin,salt);vaultMeta={salt:b64(salt)};state=blankState();try{const old=JSON.parse(localStorage.getItem("personalData")||"{}");state.personal={...state.personal,...old}}catch(e){}await persist()}else{cryptoKey=await deriveKey(pin,unb64(vaultMeta.salt));state=await decryptData(vaultMeta,cryptoKey)}$("pin").value="";$("pin2").value="";showPage("home");renderHome()}catch(e){cryptoKey=null;state=null;$("lockMessage").textContent="رقم PIN غير صحيح أو بيانات الإضبارة تالفة."}}
-function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));$(id).classList.add("active");window.scrollTo(0,0)}
-function lockApp(){state=null;cryptoKey=null;pendingPhoto=null;$("pin").value="";$("pin2").value="";showPage("lock")}
-function goHome(){showPage("home");renderHome()}
-function renderHome(){$("homePhoto").innerHTML=state.photo?'<img class="photo" alt="الصورة الشخصية" src="'+state.photo+'">':""}
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function fieldHTML(d,val=""){const [id,label,type,opts]=d,v=esc(val);if(type==="textarea")return `<label>${label}</label><textarea id="f_${id}">${v}</textarea>`;if(type==="select")return `<label>${label}</label><select id="f_${id}"><option value="">اختاري</option>${opts.split("|").map(o=>`<option value="${esc(o)}" ${o===val?"selected":""}>${o}</option>`).join("")}</select>`;if(type==="file")return `<label>${label}</label><input id="f_${id}" type="file" accept="application/pdf,.pdf,image/*">`;return `<label>${label}</label><input id="f_${id}" type="${type}" value="${v}" ${type==="number"?'min="0"':''}>`}
-function renderFields(container,defs,obj){$(container).innerHTML=defs.map(d=>fieldHTML(d,obj[d[0]]||"")).join("")}
-function readFields(defs){const o={};defs.forEach(d=>{const el=$("f_"+d[0]);if(el&&d[2]!=="file")o[d[0]]=el.value.trim()});return o}
-function openSection(id){if(id==="personal"){renderPersonal();showPage(id)}else if(id==="job"){renderJob();showPage(id)}else if(id==="alerts"){renderAlerts();showPage(id)}else{activeType=id;editingId=null;renderRecords();showPage("records")}}
-function renderPersonal(){
- const p=state.personal||{},photo=state.photo?`<img class="photo" alt="الصورة الشخصية" src="${state.photo}">`:'<div class="photo" style="display:grid;place-items:center;background:#eef2eb;color:#718071;font-size:38px">👤</div>';
- const rows=personalDefs.map(d=>`<div class="profile-row"><b>${d[1]}</b><span>${esc(p[d[0]]||"غير مدخل")}</span></div>`).join("");
- $("personalView").innerHTML=`<div class="profile-head">${photo}<div><h3>${esc(p.fullName||"اسم الموظف")}</h3><p>الإضبارة الشخصية</p><p>بيانات الموظف الأساسية</p></div></div><div class="profile-grid">${rows}</div>`;
- $("personalView").classList.remove("hidden");$("personalViewActions").classList.remove("hidden");$("personalEdit").classList.add("hidden");
- renderFields("personalFields",personalDefs,p);const img=$("photoPreview");if(state.photo){img.src=state.photo;img.classList.remove("hidden")}else img.classList.add("hidden");$("photoInput").value="";pendingPhoto=null;
-}
-function startEditPersonal(){$("personalView").classList.add("hidden");$("personalViewActions").classList.add("hidden");$("personalEdit").classList.remove("hidden");renderFields("personalFields",personalDefs,state.personal||{});const img=$("photoPreview");if(state.photo){img.src=state.photo;img.classList.remove("hidden")}else img.classList.add("hidden");$("photoInput").value="";pendingPhoto=null}
-function cancelEditPersonal(){pendingPhoto=null;renderPersonal()}
-async function savePersonal(){state.personal={...state.personal,...readFields(personalDefs)};if(pendingPhoto!==null){state.photo=pendingPhoto;pendingPhoto=null}await persist();renderHome();renderPersonal();alert("تم حفظ البيانات الشخصية بنجاح.")}
-function renderJob(){const j=state.job||{};const rows=jobDefs.map(d=>`<div class="profile-row"><b>${d[1]}</b><span>${esc(j[d[0]]||"غير مدخل")}</span></div>`).join("");$("jobView").innerHTML=`<div class="profile-head"><div><h3>${esc(j.jobTitle||"البيانات الوظيفية")}</h3><p>المعلومات الوظيفية الرسمية</p></div></div><div class="profile-grid">${rows}</div>`;$("jobView").classList.remove("hidden");$("jobEditor").classList.add("hidden")}
-function startEditJob(){$("jobView").classList.add("hidden");$("jobEditor").classList.remove("hidden");renderFields("jobFields",jobDefs,state.job||{})}
-function cancelEditJob(){renderJob()}
-async function saveJob(){state.job=readFields(jobDefs);await persist();renderJob();alert("تم حفظ البيانات الوظيفية.")}
-function loadPhoto(e){const f=e.target.files[0];if(!f)return;if(f.size>4*1024*1024){alert("حجم الصورة أكبر من 4 ميغابايت.");e.target.value="";return}const r=new FileReader();r.onload=()=>{pendingPhoto=r.result;$("photoPreview").src=pendingPhoto;$("photoPreview").classList.remove("hidden")};r.readAsDataURL(f)}
-function removePhoto(){if(!confirm("حذف الصورة الشخصية؟"))return;pendingPhoto="";$("photoPreview").classList.add("hidden");$("photoInput").value=""}
-function renderRecords(){
- const c=configs[activeType],arr=state.records[activeType]||[];
- $("recordsTitle").textContent=c.title;$("recordsDesc").textContent=c.desc;
- const old=editingId?arr.find(x=>x.id===editingId)||{}:{};
- $("recordForm").innerHTML=c.fields.map(d=>fieldHTML(d,old[d[0]]||"")).join("");
- $("recordEditor").classList.toggle("hidden",!editingId && !addingRecord);
- $("recordList").innerHTML=arr.length?arr.slice().reverse().map(r=>`<div class="profile-sheet"><div class="profile-head"><div><h3>${esc(recordHeading(r))}</h3><p>${esc(c.title)}</p></div></div><div class="profile-grid">${c.fields.filter(d=>d[2]!=="file").map(d=>`<div class="profile-row"><b>${d[1]}</b><span>${esc(r[d[0]]||"غير مدخل")}</span></div>`).join("")}${r.fileName?`<div class="profile-row"><b>المرفق</b><span>${esc(r.fileName)}</span></div>`:""}</div><div class="profile-actions no-print"><button class="secondary small" onclick="editRecord('${r.id}')">تعديل</button><button class="danger small" onclick="deleteRecord('${r.fileData?`<button class="secondary small" onclick="downloadDoc('${r.id}')">فتح المرفق</button><button class="primary small" onclick="shareDoc('${r.id}')">مشاركة المرفق</button>`:""}</div></div>`).join(""):'<div class="profile-sheet"><p class="note">لا توجد سجلات محفوظة في هذا القسم حتى الآن.</p></div>';
-}
+
+const DB_NAME="EmployeeFileLocalDB";
+const STORE="vault";
+const VAULT_KEY="main";
+
+let db=null;
+let vaultMeta=null;
+let cryptoKey=null;
+let state=null;
+let activeType="";
+let editingId=null;
+let pendingPhoto=null;
+let photoReading=false;
 let addingRecord=false;
-function startAddRecord(){editingId=null;addingRecord=true;renderRecords();$("recordEditor").classList.remove("hidden");window.scrollTo(0,0)}
-function recordHeading(r){return r.name||r.subject||r.type||r.issuer||r.date||r.startDate||"سجل"}
-async function saveRecord(){const c=configs[activeType],obj=readFields(c.fields),fd=c.fields.find(d=>d[2]==="file");if(fd){const f=$("f_"+fd[0]).files[0];if(f){if(f.size>20*1024*1024){alert("الحد الأقصى للمرفق 20 ميغابايت. اختاري ملفاً أصغر.");return}obj.fileName=f.name;obj.fileData=await fileData(f)}}
-if(activeType==="thanks"&&!obj.seniority){obj.seniority=String({"رئيس الوزراء":6,"الوزير":1,"المدير العام":1}[obj.issuer]||0)}
-const arr=state.records[activeType];if(editingId){const i=arr.findIndex(x=>x.id===editingId);if(i>=0)arr[i]={...arr[i],...obj}}else arr.push({id:crypto.randomUUID(),...obj});editingId=null;addingRecord=false;await persist();renderRecords();alert("تم حفظ السجل.")}
-function fileData(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)})}
-function editRecord(id){editingId=id;addingRecord=false;renderRecords();$("recordEditor").classList.remove("hidden");window.scrollTo(0,0)}
-function cancelEdit(){editingId=null;addingRecord=false;renderRecords()}
-async function deleteRecord(id){if(!confirm("تأكيد حذف هذا السجل؟"))return;state.records[activeType]=state.records[activeType].filter(x=>x.id!==id);await persist();renderRecords()}
-function downloadDoc(id){
- const r=(state.records[activeType]||[]).find(x=>x.id===id);
- if(!r?.fileData)return;
 
+const $=id=>document.getElementById(id);
+
+const personalDefs=[
+ ["fullName","الاسم الكامل","text"],
+ ["motherName","اسم الأم","text"],
+ ["birthDate","تاريخ الولادة","date"],
+ ["birthPlace","مكان الولادة","text"],
+ ["residence","محل السكن","text"],
+ ["phone","رقم الهاتف","tel"]
+];
+
+const jobDefs=[
+ ["jobTitle","العنوان الوظيفي","text"],
+ ["grade","الدرجة","text"],
+ ["stage","المرحلة","text"],
+ ["department","الدائرة / جهة العمل","text"],
+ ["workplace","مكان العمل","text"],
+ ["appointmentDate","تاريخ التعيين","date"],
+ ["lastPromotionDate","تاريخ آخر ترفيع","date"],
+ ["lastAllowanceDate","تاريخ آخر علاوة","date"],
+ ["certificate","التحصيل الدراسي","text"],
+ ["specialization","الاختصاص","text"],
+ ["employeeNumber","الرقم الوظيفي","text"]
+];
+
+const configs={
+ promotions:{
+  title:"الترفيعات",
+  desc:"سجلي قرارات الترفيع وتواريخها وارفقي كتاب PDF أو صورة (حتى 20 ميغابايت).",
+  fields:[
+   ["date","تاريخ الترفيع","date"],
+   ["grade","الدرجة","text"],
+   ["stage","المرحلة","text"],
+   ["bookNumber","رقم الكتاب","text"],
+   ["bookDate","تاريخ الكتاب","date"],
+   ["notes","ملاحظات","textarea"],
+   ["file","إرفاق كتاب PDF أو صورة","file"]
+  ]
+ },
+ allowances:{
+  title:"العلاوات",
+  desc:"سجلي العلاوات وتواريخها وارفقي كتاب PDF أو صورة (حتى 20 ميغابايت).",
+  fields:[
+   ["date","تاريخ العلاوة","date"],
+   ["grade","الدرجة","text"],
+   ["stage","المرحلة","text"],
+   ["bookNumber","رقم الكتاب","text"],
+   ["bookDate","تاريخ الكتاب","date"],
+   ["notes","ملاحظات","textarea"],
+   ["file","إرفاق كتاب PDF أو صورة","file"]
+  ]
+ },
+ thanks:{
+  title:"كتب الشكر والتقدير",
+  desc:"تُحفظ جميع الكتب. الحد الأقصى للاحتساب 3 كتب في السنة. القدم: رئيس الوزراء 6 أشهر، الوزير شهر، المدير العام شهر.",
+  fields:[
+   ["date","تاريخ الكتاب","date"],
+   ["issuer","جهة إصدار الكتاب","select","رئيس الوزراء|الوزير|المدير العام|جهة أخرى"],
+   ["bookNumber","رقم الكتاب","text"],
+   ["seniority","أشهر القدم","number"],
+   ["notes","ملاحظات","textarea"],
+   ["file","إرفاق كتاب PDF أو صورة","file"]
+  ]
+ },
+ leaves:{
+  title:"الإجازات",
+  desc:"سجل الإجازات ومددها، ويمكن إرفاق كتاب PDF أو صورة (حتى 20 ميغابايت).",
+  fields:[
+   ["type","نوع الإجازة","text"],
+   ["startDate","من تاريخ","date"],
+   ["endDate","إلى تاريخ","date"],
+   ["days","عدد الأيام","number"],
+   ["bookNumber","رقم الكتاب","text"],
+   ["notes","ملاحظات","textarea"],
+   ["file","إرفاق كتاب PDF أو صورة","file"]
+  ]
+ },
+ courses:{
+  title:"الدورات والشهادات",
+  desc:"سجل الدورات التدريبية والشهادات، ويمكن إرفاق الشهادة PDF أو صورة (حتى 20 ميغابايت).",
+  fields:[
+   ["name","اسم الدورة / الشهادة","text"],
+   ["provider","الجهة المنظمة","text"],
+   ["startDate","تاريخ البدء","date"],
+   ["endDate","تاريخ الانتهاء","date"],
+   ["hours","عدد الساعات","number"],
+   ["notes","ملاحظات","textarea"],
+   ["file","إرفاق شهادة PDF أو صورة","file"]
+  ]
+ },
+ letters:{
+  title:"الكتب الرسمية",
+  desc:"فهرسة الكتب الرسمية الواردة والصادرة مع إمكانية إرفاق PDF أو صورة (حتى 20 ميغابايت).",
+  fields:[
+   ["direction","نوع الكتاب","select","وارد|صادر"],
+   ["date","تاريخ الكتاب","date"],
+   ["number","رقم الكتاب","text"],
+   ["subject","الموضوع","text"],
+   ["recipient","الجهة","text"],
+   ["notes","ملاحظات","textarea"],
+   ["file","إرفاق كتاب PDF أو صورة","file"]
+  ]
+ },
+ documents:{
+  title:"المستمسكات والوثائق",
+  desc:"إرفاق صور أو ملفات PDF. الحد الأقصى 20 ميغابايت للملف الواحد.",
+  fields:[
+   ["name","اسم الوثيقة","text"],
+   ["number","رقم الوثيقة","text"],
+   ["date","تاريخ الوثيقة","date"],
+   ["notes","ملاحظات","textarea"],
+   ["file","اختيار ملف","file"]
+  ]
+ }
+};
+
+function openDB(){
+ return new Promise((resolve,reject)=>{
+  const request=indexedDB.open(DB_NAME,1);
+
+  request.onupgradeneeded=()=>{
+   const database=request.result;
+   if(!database.objectStoreNames.contains(STORE)){
+    database.createObjectStore(STORE);
+   }
+  };
+
+  request.onsuccess=()=>resolve(request.result);
+  request.onerror=()=>reject(request.error);
+ });
+}
+
+function dbGet(){
+ return new Promise((resolve,reject)=>{
+  const request=db.transaction(STORE).objectStore(STORE).get(VAULT_KEY);
+  request.onsuccess=()=>resolve(request.result||null);
+  request.onerror=()=>reject(request.error);
+ });
+}
+
+function dbPut(value){
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction(STORE,"readwrite");
+
+  tx.objectStore(STORE).put(value,VAULT_KEY);
+
+  tx.oncomplete=()=>resolve();
+  tx.onerror=()=>reject(tx.error);
+  tx.onabort=()=>reject(tx.error||new Error("Database write aborted"));
+ });
+}
+
+function b64(bytes){
+ let result="";
+ new Uint8Array(bytes).forEach(x=>result+=String.fromCharCode(x));
+ return btoa(result);
+}
+
+function unb64(value){
+ return Uint8Array.from(atob(value),c=>c.charCodeAt(0));
+}
+
+async function deriveKey(pin,salt){
+ const raw=await crypto.subtle.importKey(
+  "raw",
+  new TextEncoder().encode(pin),
+  "PBKDF2",
+  false,
+  ["deriveKey"]
+ );
+
+ return crypto.subtle.deriveKey(
+  {name:"PBKDF2",salt,iterations:310000,hash:"SHA-256"},
+  raw,
+  {name:"AES-GCM",length:256},
+  false,
+  ["encrypt","decrypt"]
+ );
+}
+
+async function encryptData(data,key){
+ const iv=crypto.getRandomValues(new Uint8Array(12));
+ const plain=new TextEncoder().encode(JSON.stringify(data));
+
+ const cipher=await crypto.subtle.encrypt(
+  {name:"AES-GCM",iv},
+  key,
+  plain
+ );
+
+ return {version:1,iv:b64(iv),cipher:b64(cipher)};
+}
+
+async function decryptData(meta,key){
+ const plain=await crypto.subtle.decrypt(
+  {name:"AES-GCM",iv:unb64(meta.iv)},
+  key,
+  unb64(meta.cipher)
+ );
+
+ return JSON.parse(new TextDecoder().decode(plain));
+}
+
+function blankState(){
+ return {
+  personal:{},
+  job:{},
+  photo:"",
+  records:{
+   promotions:[],
+   allowances:[],
+   thanks:[],
+   leaves:[],
+   courses:[],
+   letters:[],
+   documents:[]
+  }
+ };
+}
+
+function normalizeState(saved){
+ const base=blankState();
+
+ return {
+  ...base,
+  ...saved,
+  personal:{...base.personal,...(saved.personal||{})},
+  job:{...base.job,...(saved.job||{})},
+  records:{...base.records,...(saved.records||{})}
+ };
+}
+
+async function persist(){
+ if(!db||!cryptoKey||!vaultMeta){
+  throw new Error("Secure storage is not ready");
+ }
+
+ const encrypted=await encryptData(state,cryptoKey);
+
+ await dbPut({
+  salt:vaultMeta.salt,
+  ...encrypted
+ });
+}
+
+async function init(){
  try{
-  const parts=r.fileData.split(",");
-  const mime=parts[0].match(/data:([^;]+)/)?.[1]||"application/octet-stream";
-  const binary=atob(parts[1]);
-  const bytes=new Uint8Array(binary.length);
-
-  for(let i=0;i<binary.length;i++){
-   bytes[i]=binary.charCodeAt(i);
+  if(!window.crypto||!crypto.subtle||!window.indexedDB){
+   throw new Error("Secure storage unavailable");
   }
 
-  const blob=new Blob([bytes],{type:mime});
-  const url=URL.createObjectURL(blob);
+  db=await openDB();
+  vaultMeta=await dbGet();
+
+  if(vaultMeta){
+   $("lockTitle").textContent="فتح الإضبارة";
+   $("lockInfo").textContent="أدخلي رقم PIN لفتح بياناتك.";
+   $("confirmWrap").classList.add("hidden");
+  }else{
+   $("lockTitle").textContent="إنشاء حماية الإضبارة";
+   $("lockInfo").textContent="اختاري رقم PIN من 6 أرقام لهذه الإضبارة.";
+  }
+ }catch(error){
+  console.error("Initialization error:",error);
+  $("lockMessage").textContent=
+   "تعذر تهيئة التخزين الآمن. افتحي رابط التطبيق عبر HTTPS في متصفح حديث.";
+ }
+}
+
+async function submitPin(){
+ const pin=$("pin").value;
+
+ if(!/^\d{6}$/.test(pin)){
+  $("lockMessage").textContent="أدخلي 6 أرقام بالضبط.";
+  return;
+ }
+
+ try{
+  if(!vaultMeta){
+   if(pin!==$("pin2").value){
+    $("lockMessage").textContent="رقما PIN غير متطابقين.";
+    return;
+   }
+
+   const salt=crypto.getRandomValues(new Uint8Array(16));
+   cryptoKey=await deriveKey(pin,salt);
+   vaultMeta={salt:b64(salt)};
+   state=blankState();
+
+   try{
+    const old=JSON.parse(localStorage.getItem("personalData")||"{}");
+    state.personal={...state.personal,...old};
+   }catch(error){
+    console.warn("Old local data could not be read:",error);
+   }
+
+   await persist();
+  }else{
+   cryptoKey=await deriveKey(pin,unb64(vaultMeta.salt));
+   state=normalizeState(await decryptData(vaultMeta,cryptoKey));
+  }
+
+  $("pin").value="";
+  $("pin2").value="";
+  $("lockMessage").textContent="";
+  showPage("home");
+  renderHome();
+
+ }catch(error){
+  console.error("PIN or storage error:",error);
+  cryptoKey=null;
+  state=null;
+  $("lockMessage").textContent=
+   "رقم PIN غير صحيح أو تعذر حفظ/فتح بيانات الإضبارة. لم يتم تأكيد العملية.";
+ }
+}
+ function showPage(id){
+ document.querySelectorAll(".page").forEach(page=>page.classList.remove("active"));
+ $(id).classList.add("active");
+ window.scrollTo(0,0);
+}
+
+function lockApp(){
+ state=null;
+ cryptoKey=null;
+ pendingPhoto=null;
+ photoReading=false;
+ $("pin").value="";
+ $("pin2").value="";
+ showPage("lock");
+}
+
+function goHome(){
+ showPage("home");
+ renderHome();
+}
+
+function renderHome(){
+ $("homePhoto").innerHTML=state&&state.photo
+  ?'<img class="photo" alt="الصورة الشخصية" src="'+state.photo+'">'
+  :"";
+}
+
+function esc(value){
+ return String(value??"").replace(/[&<>"']/g,char=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ }[char]));
+}
+
+function fieldHTML(def,value=""){
+ const [id,label,type,options]=def;
+ const safeValue=esc(value);
+
+ if(type==="textarea"){
+  return `<label>${label}</label><textarea id="f_${id}">${safeValue}</textarea>`;
+ }
+
+ if(type==="select"){
+  return `<label>${label}</label><select id="f_${id}">
+   <option value="">اختاري</option>
+   ${options.split("|").map(option=>
+    `<option value="${esc(option)}" ${option===value?"selected":""}>${esc(option)}</option>`
+   ).join("")}
+  </select>`;
+ }
+
+ if(type==="file"){
+  return `<label>${label}</label><input id="f_${id}" type="file" accept="application/pdf,.pdf,image/*">`;
+ }
+
+ return `<label>${label}</label><input id="f_${id}" type="${type}" value="${safeValue}" ${type==="number"?'min="0"':''}>`;
+}
+
+function renderFields(container,defs,obj){
+ $(container).innerHTML=defs.map(def=>
+  fieldHTML(def,obj[def[0]]||"")
+ ).join("");
+}
+
+function readFields(defs){
+ const result={};
+
+ defs.forEach(def=>{
+  const element=$("f_"+def[0]);
+
+  if(element&&def[2]!=="file"){
+   result[def[0]]=element.value.trim();
+  }
+ });
+
+ return result;
+}
+
+function openSection(id){
+ if(id==="personal"){
+  renderPersonal();
+  showPage(id);
+  return;
+ }
+
+ if(id==="job"){
+  renderJob();
+  showPage(id);
+  return;
+ }
+
+ if(id==="alerts"){
+  renderAlerts();
+  showPage(id);
+  return;
+ }
+
+ if(configs[id]){
+  activeType=id;
+  editingId=null;
+  addingRecord=false;
+  renderRecords();
+  showPage("records");
+ }
+}
+
+function renderPersonal(){
+ const personal=state.personal||{};
+
+ const photo=state.photo
+  ?`<img class="photo" alt="الصورة الشخصية" src="${state.photo}">`
+  :'<div class="photo" style="display:grid;place-items:center;background:#eef2eb;color:#718071;font-size:38px">👤</div>';
+
+ const rows=personalDefs.map(def=>
+  `<div class="profile-row"><b>${def[1]}</b><span>${esc(personal[def[0]]||"غير مدخل")}</span></div>`
+ ).join("");
+
+ $("personalView").innerHTML=
+  `<div class="profile-head">${photo}<div>
+   <h3>${esc(personal.fullName||"اسم الموظف")}</h3>
+   <p>الإضبارة الشخصية</p>
+   <p>بيانات الموظف الأساسية</p>
+  </div></div><div class="profile-grid">${rows}</div>`;
+
+ $("personalView").classList.remove("hidden");
+ $("personalViewActions").classList.remove("hidden");
+ $("personalEdit").classList.add("hidden");
+
+ renderFields("personalFields",personalDefs,personal);
+
+ const image=$("photoPreview");
+
+ if(state.photo){
+  image.src=state.photo;
+  image.classList.remove("hidden");
+ }else{
+  image.classList.add("hidden");
+ }
+
+ $("photoInput").value="";
+ pendingPhoto=null;
+ photoReading=false;
+}
+
+function startEditPersonal(){
+ $("personalView").classList.add("hidden");
+ $("personalViewActions").classList.add("hidden");
+ $("personalEdit").classList.remove("hidden");
+
+ renderFields("personalFields",personalDefs,state.personal||{});
+
+ const image=$("photoPreview");
+
+ if(state.photo){
+  image.src=state.photo;
+  image.classList.remove("hidden");
+ }else{
+  image.classList.add("hidden");
+ }
+
+ $("photoInput").value="";
+ pendingPhoto=null;
+ photoReading=false;
+}
+
+function cancelEditPersonal(){
+ pendingPhoto=null;
+ photoReading=false;
+ renderPersonal();
+}
+
+async function savePersonal(){
+ if(photoReading){
+  alert("انتظري حتى يكتمل تحميل الصورة ثم اضغطي حفظ.");
+  return;
+ }
+
+ const oldPersonal={...state.personal};
+ const oldPhoto=state.photo;
+
+ const newPersonal={
+  ...state.personal,
+  ...readFields(personalDefs)
+ };
+
+ const newPhoto=pendingPhoto!==null?pendingPhoto:state.photo;
+
+ try{
+  state.personal=newPersonal;
+  state.photo=newPhoto;
+
+  await persist();
+
+  pendingPhoto=null;
+  renderHome();
+  renderPersonal();
+
+  alert("تم حفظ البيانات الشخصية بنجاح.");
+ }catch(error){
+  state.personal=oldPersonal;
+  state.photo=oldPhoto;
+
+  console.error("Personal save error:",error);
+  alert("تعذر حفظ البيانات. لم يتم تأكيد الحفظ. تأكدي من مساحة التخزين وحاولي مرة أخرى.");
+ }
+}
+
+function renderJob(){
+ const job=state.job||{};
+
+ const rows=jobDefs.map(def=>
+  `<div class="profile-row"><b>${def[1]}</b><span>${esc(job[def[0]]||"غير مدخل")}</span></div>`
+ ).join("");
+
+ $("jobView").innerHTML=
+  `<div class="profile-head"><div>
+   <h3>${esc(job.jobTitle||"البيانات الوظيفية")}</h3>
+   <p>المعلومات الوظيفية الرسمية</p>
+  </div></div><div class="profile-grid">${rows}</div>`;
+
+ $("jobView").classList.remove("hidden");
+ $("jobEditor").classList.add("hidden");
+}
+
+function startEditJob(){
+ $("jobView").classList.add("hidden");
+ $("jobEditor").classList.remove("hidden");
+ renderFields("jobFields",jobDefs,state.job||{});
+}
+
+function cancelEditJob(){
+ renderJob();
+}
+
+async function saveJob(){
+ const oldJob={...state.job};
+
+ try{
+  state.job={
+   ...state.job,
+   ...readFields(jobDefs)
+  };
+
+  await persist();
+
+  renderJob();
+  alert("تم حفظ البيانات الوظيفية.");
+ }catch(error){
+  state.job=oldJob;
+
+  console.error("Job save error:",error);
+  alert("تعذر حفظ البيانات الوظيفية. لم يتم تأكيد الحفظ.");
+ }
+}
+
+function loadPhoto(event){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+
+ if(file.size>4*1024*1024){
+  alert("حجم الصورة أكبر من 4 ميغابايت.");
+  event.target.value="";
+  return;
+ }
+
+ photoReading=true;
+
+ const reader=new FileReader();
+
+ reader.onload=()=>{
+  pendingPhoto=reader.result;
+  photoReading=false;
+  $("photoPreview").src=pendingPhoto;
+  $("photoPreview").classList.remove("hidden");
+ };
+
+ reader.onerror=()=>{
+  photoReading=false;
+  pendingPhoto=null;
+  alert("تعذر قراءة الصورة.");
+ };
+
+ reader.readAsDataURL(file);
+}
+
+function removePhoto(){
+ if(!confirm("حذف الصورة الشخصية؟"))return;
+
+ pendingPhoto="";
+ photoReading=false;
+ $("photoPreview").classList.add("hidden");
+ $("photoInput").value="";
+}
+
+function renderRecords(){
+ const config=configs[activeType];
+ if(!config)return;
+
+ const records=state.records[activeType]||[];
+
+ const oldRecord=editingId
+  ?records.find(record=>record.id===editingId)||{}
+  :{};
+
+ $("recordsTitle").textContent=config.title;
+ $("recordsDesc").textContent=config.desc;
+
+ $("recordForm").innerHTML=config.fields.map(def=>
+  fieldHTML(def,oldRecord[def[0]]||"")
+ ).join("");
+
+ if(oldRecord.fileName){
+  $("recordForm").insertAdjacentHTML(
+   "beforeend",
+   `<p class="note">المرفق الحالي: ${esc(oldRecord.fileName)}. اتركي اختيار الملف فارغاً للاحتفاظ به.</p>`
+  );
+ }
+
+ $("recordEditor").classList.toggle(
+  "hidden",
+  !editingId&&!addingRecord
+ );
+
+ if(records.length){
+  $("recordList").innerHTML=records.slice().reverse().map(record=>{
+   const attachmentButtons=record.fileData
+    ?`<div class="profile-actions no-print">
+       <button class="secondary small" onclick="downloadDoc('${record.id}')">فتح المرفق</button>
+       <button class="primary small" onclick="shareDoc('${record.id}')">مشاركة المرفق</button>
+      </div>`
+    :"";
+
+   const fields=config.fields
+    .filter(def=>def[2]!=="file")
+    .map(def=>
+     `<div class="profile-row"><b>${def[1]}</b><span>${esc(record[def[0]]||"غير مدخل")}</span></div>`
+    ).join("");
+
+   const fileName=record.fileName
+    ?`<div class="profile-row"><b>المرفق</b><span>${esc(record.fileName)}</span></div>`
+    :"";
+
+   return `<div class="profile-sheet">
+    <div class="profile-head"><div>
+     <h3>${esc(recordHeading(record))}</h3>
+     <p>${esc(config.title)}</p>
+    </div></div>
+    <div class="profile-grid">${fields}${fileName}</div>
+    <div class="profile-actions no-print">
+     <button class="secondary small" onclick="editRecord('${record.id}')">تعديل</button>
+     <button class="danger small" onclick="deleteRecord('${record.id}')">حذف</button>
+    </div>
+    ${attachmentButtons}
+   </div>`;
+  }).join("");
+ }else{
+  $("recordList").innerHTML=
+   '<div class="profile-sheet"><p class="note">لا توجد سجلات محفوظة في هذا القسم حتى الآن.</p></div>';
+ }
+}
+
+function startAddRecord(){
+ editingId=null;
+ addingRecord=true;
+ renderRecords();
+ $("recordEditor").classList.remove("hidden");
+ window.scrollTo(0,0);
+}
+
+function recordHeading(record){
+ return record.name||
+  record.subject||
+  record.type||
+  record.issuer||
+  record.date||
+  record.startDate||
+  record.bookNumber||
+  "سجل";
+}
+
+function fileData(file){
+ return new Promise((resolve,reject)=>{
+  const reader=new FileReader();
+
+  reader.onload=()=>resolve(reader.result);
+  reader.onerror=()=>reject(reader.error||new Error("File read failed"));
+
+  reader.readAsDataURL(file);
+ });
+}
+
+async function saveRecord(){
+ const config=configs[activeType];
+ const values=readFields(config.fields);
+ const fileDef=config.fields.find(def=>def[2]==="file");
+
+ const records=state.records[activeType]||[];
+
+ const existing=editingId
+  ?records.find(record=>record.id===editingId)
+  :null;
+
+ const oldRecords=records.slice();
+
+ try{
+  if(fileDef){
+   const input=$("f_"+fileDef[0]);
+   const file=input&&input.files&&input.files[0];
+
+   if(file){
+    if(file.size>20*1024*1024){
+     alert("الحد الأقصى للمرفق 20 ميغابايت. اختاري ملفاً أصغر.");
+     return;
+    }
+
+    values.fileName=file.name;
+    values.fileData=await fileData(file);
+   }else if(existing){
+    values.fileName=existing.fileName||"";
+    values.fileData=existing.fileData||"";
+   }
+  }
+
+  if(activeType==="thanks"&&!values.seniority){
+   values.seniority=String({
+    "رئيس الوزراء":6,
+    "الوزير":1,
+    "المدير العام":1
+   }[values.issuer]||0);
+  }
+
+  if(editingId){
+   const index=records.findIndex(record=>record.id===editingId);
+
+   if(index<0){
+    throw new Error("Record not found");
+   }
+
+   records[index]={...records[index],...values};
+  }else{
+   records.push({
+    id:crypto.randomUUID(),
+    ...values
+   });
+  }
+
+  await persist();
+
+  editingId=null;
+  addingRecord=false;
+
+  renderRecords();
+  alert("تم حفظ السجل.");
+
+ }catch(error){
+  state.records[activeType]=oldRecords;
+
+  console.error("Record save error:",error);
+  alert("تعذر حفظ السجل أو المرفق. لم يتم تأكيد الحفظ. حاولي مرة أخرى.");
+ }
+}
+
+function editRecord(id){
+ editingId=id;
+ addingRecord=false;
+ renderRecords();
+ $("recordEditor").classList.remove("hidden");
+ window.scrollTo(0,0);
+}
+
+function cancelEdit(){
+ editingId=null;
+ addingRecord=false;
+ renderRecords();
+}
+
+async function deleteRecord(id){
+ if(!confirm("تأكيد حذف هذا السجل؟"))return;
+
+ const oldRecords=state.records[activeType].slice();
+
+ try{
+  state.records[activeType]=state.records[activeType].filter(
+   record=>record.id!==id
+  );
+
+  await persist();
+
+  renderRecords();
+  alert("تم حذف السجل.");
+
+ }catch(error){
+  state.records[activeType]=oldRecords;
+
+  console.error("Record delete error:",error);
+  alert("تعذر حذف السجل وحفظ التغيير. بقي السجل محفوظاً.");
+ }
+}
+
+function findRecord(id){
+ return (state.records[activeType]||[]).find(record=>record.id===id);
+}
+
+function recordBlob(record){
+ if(!record||!record.fileData){
+  throw new Error("Attachment not found");
+ }
+
+ const parts=record.fileData.split(",");
+ if(parts.length<2)throw new Error("Invalid attachment");
+
+ const match=parts[0].match(/data:([^;]+)/);
+ const mime=match?match[1]:"application/octet-stream";
+ const binary=atob(parts[1]);
+ const bytes=new Uint8Array(binary.length);
+
+ for(let i=0;i<binary.length;i++){
+  bytes[i]=binary.charCodeAt(i);
+ }
+
+ return new Blob([bytes],{type:mime});
+}
+
+function downloadDoc(id){
+ const record=findRecord(id);
+ if(!record||!record.fileData)return;
+
+ let url="";
+
+ try{
+  const blob=recordBlob(record);
+  url=URL.createObjectURL(blob);
+
   const opened=window.open(url,"_blank");
 
   if(!opened){
-   const a=document.createElement("a");
-   a.href=url;
-   a.download=r.fileName||"document";
-   document.body.appendChild(a);
-   a.click();
-   a.remove();
+   const link=document.createElement("a");
+   link.href=url;
+   link.download=record.fileName||"document";
+   document.body.appendChild(link);
+   link.click();
+   link.remove();
   }
 
-  setTimeout(()=>URL.revokeObjectURL(url),300000);
- }catch(e){
-  alert("تعذر فتح المرفق. حاولي مرة أخرى.");
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
+
+ }catch(error){
+  if(url)URL.revokeObjectURL(url);
+
+  console.error("Open attachment error:",error);
+  alert("تعذر فتح المرفق. حاولي تنزيله أو مشاركته.");
  }
 }
-function addMonths(s,n){if(!s)return null;const d=new Date(s+"T12:00:00");if(isNaN(d))return null;const day=d.getDate();d.setMonth(d.getMonth()+n);if(d.getDate()<day)d.setDate(0);return d}
-function fmt(d){return d?d.toLocaleDateString("ar-IQ"):"غير محدد"}
-function renderAlerts(){const j=state.job,today=new Date();let html="";function item(title,d){if(!d)return `<div class="record"><b>${title}</b><p>أدخلي تاريخ آخر إجراء أو تاريخ التعيين في البيانات الوظيفية.</p></div>`;const days=Math.ceil((d-today)/86400000);const msg=days<0?"موعد الاستحقاق قد حلّ أو تجاوز التاريخ.":days<=60?`متبقي ${days} يوم تقريباً.`:"لم يحن موعد الاستحقاق بعد.";return `<div class="record"><b>${title}</b><p>التاريخ المتوقع: ${fmt(d)}</p><p>${msg}</p></div>`}
-html+=item("العلاوة السنوية (كل 12 شهراً)",addMonths(j.lastAllowanceDate||j.appointmentDate,12));html+=item("الترفيع (كل 48 شهراً)",addMonths(j.lastPromotionDate||j.appointmentDate,48));
-const list=(state.records.thanks||[]).slice().sort((a,b)=>(a.date||"").localeCompare(b.date||""));let used={},counted=0,months=0;list.forEach(r=>{const y=(r.date||"").slice(0,4);if(!y)return;used[y]=(used[y]||0)+1;if(used[y]<=3){counted++;months+=Number(r.seniority)||0}});
-html+=`<div class="record"><b>كتب الشكر والقدم</b><p>إجمالي الكتب المحفوظة: ${list.length}</p><p>الكتب المحتسبة ضمن حد 3 كتب سنوياً: ${counted}</p><p>الكتب الزائدة غير المحتسبة ضمن الحد: ${list.length-counted}</p><p>مجموع أشهر القدم المسجلة للكتب المحتسبة: ${months} شهر</p><p class="note">يُرجى تدقيق الاستحقاق والاحتساب رسمياً مع الموارد البشرية. يحتسب البرنامج أول 3 كتب زمنياً في كل سنة حسب تواريخها المسجلة.</p></div>`;$("alertsContent").innerHTML=html}
-async function exportBackup(){try{const enc=await encryptData(state,cryptoKey);const pack={app:"e-employee-file",version:1,salt:vaultMeta.salt,...enc};const blob=new Blob([JSON.stringify(pack)],{type:"application/octet-stream"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="إضبارتي-نسخة-احتياطية.eefile";a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);alert("تم إنشاء ملف النسخة الاحتياطية المشفّر. احفظيه في مكان آمن.")}catch(e){alert("تعذر إنشاء النسخة الاحتياطية.")}}
-async function importBackup(e){const f=e.target.files[0];if(!f)return;try{const pack=JSON.parse(await f.text());if(pack.app!=="e-employee-file"||!pack.salt||!pack.iv||!pack.cipher)throw Error("format");const p=prompt("أدخلي PIN المستخدم عند إنشاء النسخة الاحتياطية (6 أرقام):");if(!/^\d{6}$/.test(p||""))throw Error("pin");const key=await deriveKey(p,unb64(pack.salt)),restored=await decryptData(pack,key);if(!restored.personal||!restored.records)throw Error("data");if(!confirm("ستُستبدل الإضبارة الحالية بمحتويات النسخة الاحتياطية. هل تريدين المتابعة؟"))return;state=restored;cryptoKey=key;vaultMeta={salt:pack.salt};await dbPut({salt:pack.salt,iv:pack.iv,cipher:pack.cipher,version:1});alert("تمت استعادة النسخة الاحتياطية.");goHome()}catch(err){alert("تعذرت الاستعادة. تأكدي من الملف ورقم PIN.")}finally{e.target.value=""}}
-function printDossier(){let html="";function block(title,obj,defs){html+=`<div class="record"><h3>${title}</h3>${defs.map(d=>obj[d[0]]?`<p><b>${d[1]}:</b> ${esc(obj[d[0]])}</p>`:"").join("")}</div>`}
-block("البيانات الشخصية",state.personal,personalDefs);block("البيانات الوظيفية",state.job,jobDefs);
-Object.keys(configs).forEach(k=>{html+=`<div class="record"><h3>${configs[k].title}</h3>`;(state.records[k]||[]).forEach(r=>{html+=`<p><b>${esc(recordHeading(r))}</b></p>${configs[k].fields.filter(d=>d[2]!=="file").map(d=>r[d[0]]?`<p>${d[1]}: ${esc(r[d[0]])}</p>`:"").join("")}${r.fileName?`<p>المرفق: ${esc(r.fileName)} (يُفتح من التطبيق)</p>`:""}<hr>`});if(!(state.records[k]||[]).length)html+="<p>لا توجد سجلات.</p>";html+="</div>"});
-$("printContent").innerHTML=(state.photo?`<img class="photo" src="${state.photo}" alt="الصورة الشخصية">`:"")+html;showPage("printDossier");setTimeout(()=>window.print(),250)}
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));
+
+async function shareDoc(id){
+ const record=findRecord(id);
+ if(!record||!record.fileData)return;
+
+ try{
+  const blob=recordBlob(record);
+
+  const file=new File(
+   [blob],
+   record.fileName||"مرفق",
+   {type:blob.type}
+  );
+
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+   await navigator.share({
+    files:[file],
+    title:record.fileName||"مرفق الإضبارة"
+   });
+  }else{
+   const url=URL.createObjectURL(blob);
+   const link=document.createElement("a");
+
+   link.href=url;
+   link.download=record.fileName||"attachment";
+
+   document.body.appendChild(link);
+   link.click();
+   link.remove();
+
+   setTimeout(()=>URL.revokeObjectURL(url),60000);
+
+   alert("المشاركة المباشرة غير مدعومة في هذا المتصفح. تم تنزيل المرفق؛ افتحيه من تطبيق الملفات واختاري مشاركة.");
+  }
+
+ }catch(error){
+  if(error.name!=="AbortError"){
+   console.error("Share attachment error:",error);
+   alert("تعذرت مشاركة المرفق. يمكنك تنزيله ثم مشاركته من تطبيق الملفات.");
+  }
+ }
+}
+ function addMonths(dateString,months){
+ if(!dateString)return null;
+
+ const date=new Date(dateString+"T12:00:00");
+ if(isNaN(date.getTime()))return null;
+
+ const day=date.getDate();
+ date.setMonth(date.getMonth()+months);
+
+ if(date.getDate()<day){
+  date.setDate(0);
+ }
+
+ return date;
+}
+
+function fmt(date){
+ return date?date.toLocaleDateString("ar-IQ"):"غير محدد";
+}
+
+function renderAlerts(){
+ const job=state.job||{};
+ const today=new Date();
+ let html="";
+
+ function item(title,date){
+  if(!date){
+   return `<div class="record"><b>${title}</b><p>أدخلي تاريخ آخر إجراء أو تاريخ التعيين في البيانات الوظيفية.</p></div>`;
+  }
+
+  const days=Math.ceil((date-today)/86400000);
+
+  const message=days<0
+   ?"موعد الاستحقاق قد حلّ أو تجاوز التاريخ."
+   :days<=60
+    ?`متبقي ${days} يوم تقريباً.`
+    :"لم يحن موعد الاستحقاق بعد.";
+
+  return `<div class="record">
+   <b>${title}</b>
+   <p>التاريخ المتوقع: ${fmt(date)}</p>
+   <p>${message}</p>
+  </div>`;
+ }
+
+ html+=item(
+  "العلاوة السنوية (كل 12 شهراً)",
+  addMonths(job.lastAllowanceDate||job.appointmentDate,12)
+ );
+
+ html+=item(
+  "الترفيع (كل 48 شهراً)",
+  addMonths(job.lastPromotionDate||job.appointmentDate,48)
+ );
+
+ const thanks=(state.records.thanks||[])
+  .slice()
+  .sort((a,b)=>(a.date||"").localeCompare(b.date||""));
+
+ const used={};
+ let counted=0;
+ let months=0;
+
+ thanks.forEach(record=>{
+  const year=(record.date||"").slice(0,4);
+  if(!year)return;
+
+  used[year]=(used[year]||0)+1;
+
+  if(used[year]<=3){
+   counted++;
+   months+=Number(record.seniority)||0;
+  }
+ });
+
+ html+=`<div class="record">
+  <b>كتب الشكر والقدم</b>
+  <p>إجمالي الكتب المحفوظة: ${thanks.length}</p>
+  <p>الكتب المحتسبة ضمن حد 3 كتب سنوياً: ${counted}</p>
+  <p>الكتب الزائدة غير المحتسبة ضمن الحد: ${thanks.length-counted}</p>
+  <p>مجموع أشهر القدم المسجلة للكتب المحتسبة: ${months} شهر</p>
+  <p class="note">يُرجى تدقيق الاستحقاق والاحتساب رسمياً مع الموارد البشرية. يحتسب البرنامج أول 3 كتب زمنياً في كل سنة حسب تواريخها المسجلة.</p>
+ </div>`;
+
+ $("alertsContent").innerHTML=html;
+}
+
+async function exportBackup(){
+ try{
+  const encrypted=await encryptData(state,cryptoKey);
+
+  const backup={
+   app:"e-employee-file",
+   version:1,
+   salt:vaultMeta.salt,
+   ...encrypted
+  };
+
+  const blob=new Blob(
+   [JSON.stringify(backup)],
+   {type:"application/octet-stream"}
+  );
+
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+
+  link.href=url;
+  link.download="إضبارتي-نسخة-احتياطية.eefile";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+
+  alert("تم إنشاء ملف النسخة الاحتياطية المشفّر. احفظيه في مكان آمن.");
+ }catch(error){
+  console.error("Backup export error:",error);
+  alert("تعذر إنشاء النسخة الاحتياطية. حاولي مرة أخرى.");
+ }
+}
+
+async function importBackup(event){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+
+ try{
+  const backup=JSON.parse(await file.text());
+
+  if(
+   backup.app!=="e-employee-file"||
+   backup.version!==1||
+   !backup.salt||
+   !backup.iv||
+   !backup.cipher
+  ){
+   throw new Error("Invalid backup file");
+  }
+
+  const pin=prompt("أدخلي PIN المستخدم عند إنشاء النسخة الاحتياطية (6 أرقام):");
+
+  if(!/^\d{6}$/.test(pin||"")){
+   throw new Error("Invalid PIN");
+  }
+
+  const restoredKey=await deriveKey(pin,unb64(backup.salt));
+
+  const restoredState=normalizeState(
+   await decryptData(backup,restoredKey)
+  );
+
+  if(!restoredState.personal||!restoredState.records){
+   throw new Error("Invalid data");
+  }
+
+  if(!confirm("ستُستبدل الإضبارة الحالية بمحتويات النسخة الاحتياطية. هل تريدين المتابعة؟")){
+   return;
+  }
+
+  await dbPut({
+   salt:backup.salt,
+   iv:backup.iv,
+   cipher:backup.cipher,
+   version:1
+  });
+
+  state=restoredState;
+  cryptoKey=restoredKey;
+
+  vaultMeta={
+   salt:backup.salt,
+   iv:backup.iv,
+   cipher:backup.cipher,
+   version:1
+  };
+
+  alert("تمت استعادة النسخة الاحتياطية.");
+  goHome();
+
+ }catch(error){
+  console.error("Backup import error:",error);
+  alert("تعذرت الاستعادة. تأكدي من الملف ورقم PIN، ولم يتم تأكيد الاستعادة.");
+ }finally{
+  event.target.value="";
+ }
+}
+
+function printDossier(){
+ let html="";
+
+ function block(title,obj,defs){
+  html+=`<div class="record"><h3>${title}</h3>`;
+
+  html+=defs.map(def=>
+   obj&&obj[def[0]]
+    ?`<p><b>${def[1]}:</b> ${esc(obj[def[0]])}</p>`
+    :""
+  ).join("");
+
+  html+="</div>";
+ }
+
+ block("البيانات الشخصية",state.personal,personalDefs);
+ block("البيانات الوظيفية",state.job,jobDefs);
+
+ Object.keys(configs).forEach(key=>{
+  html+=`<div class="record"><h3>${configs[key].title}</h3>`;
+
+  (state.records[key]||[]).forEach(record=>{
+   html+=`<p><b>${esc(recordHeading(record))}</b></p>`;
+
+   html+=configs[key].fields
+    .filter(def=>def[2]!=="file")
+    .map(def=>
+     record[def[0]]
+      ?`<p>${def[1]}: ${esc(record[def[0]])}</p>`
+      :""
+    ).join("");
+
+   if(record.fileName){
+    html+=`<p>المرفق: ${esc(record.fileName)} (يُفتح من التطبيق)</p>`;
+   }
+
+   html+="<hr>";
+  });
+
+  if(!(state.records[key]||[]).length){
+   html+="<p>لا توجد سجلات.</p>";
+  }
+
+  html+="</div>";
+ });
+
+ $("printContent").innerHTML=
+  (state.photo
+   ?`<img class="photo" src="${state.photo}" alt="الصورة الشخصية">`
+   :"")+html;
+
+ showPage("printDossier");
+
+ setTimeout(()=>window.print(),300);
+}
+
+if("serviceWorker" in navigator){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register("./service-worker.js").catch(error=>{
+   console.warn("Service worker unavailable:",error);
+  });
+ });
+}
+
+window.addEventListener("beforeunload",()=>{
+ pendingPhoto=null;
+});
+
 init();
 </script>
 </body>
