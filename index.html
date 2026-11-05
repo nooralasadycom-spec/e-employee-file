@@ -71,14 +71,18 @@ footer{text-align:center;color:#777;padding:20px;font-size:13px}hr{border:0;bord
 </section>
 
 <section id="job" class="page">
- <div class="intro"><h2>البيانات الوظيفية</h2><p>معلومات التعيين والملاك والعنوان الوظيفي</p></div>
- <div class="field" id="jobFields"></div><div class="actions no-print"><button class="primary" onclick="saveJob()">حفظ البيانات</button><button class="secondary" onclick="window.print()">طباعة</button></div><button class="back no-print" onclick="goHome()">رجوع</button>
+ <div class="intro"><h2>الإضبارة الوظيفية</h2><p>بيانات التعيين والملاك والعنوان الوظيفي</p></div>
+ <div id="jobView" class="profile-sheet"></div>
+ <div class="profile-actions no-print"><button class="primary" onclick="startEditJob()">تعديل البيانات</button><button class="secondary" onclick="window.print()">طباعة</button></div>
+ <div id="jobEditor" class="hidden"><div class="field" id="jobFields"></div><div class="actions no-print"><button class="primary" onclick="saveJob()">حفظ البيانات</button><button class="secondary" onclick="cancelEditJob()">إلغاء</button></div></div>
+ <button class="back no-print" onclick="goHome()">رجوع</button>
 </section>
 
 <section id="records" class="page">
  <div class="intro"><h2 id="recordsTitle"></h2><p id="recordsDesc"></p></div>
- <div class="field" id="recordForm"></div><div class="actions no-print"><button class="primary" onclick="saveRecord()">حفظ السجل</button><button class="secondary" onclick="cancelEdit()">إلغاء التعديل</button><button class="secondary" onclick="window.print()">طباعة</button></div>
- <hr><div id="recordList"></div><button class="back no-print" onclick="goHome()">رجوع</button>
+ <div class="profile-actions no-print"><button class="primary" onclick="startAddRecord()">＋ إضافة سجل</button><button class="secondary" onclick="window.print()">طباعة</button></div>
+ <div id="recordEditor" class="hidden"><div class="field" id="recordForm"></div><div class="actions no-print"><button class="primary" onclick="saveRecord()">حفظ السجل</button><button class="secondary" onclick="cancelEdit()">إلغاء</button></div></div>
+ <div id="recordList"></div><button class="back no-print" onclick="goHome()">رجوع</button>
 </section>
 
 <section id="alerts" class="page">
@@ -128,7 +132,7 @@ function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&l
 function fieldHTML(d,val=""){const [id,label,type,opts]=d,v=esc(val);if(type==="textarea")return `<label>${label}</label><textarea id="f_${id}">${v}</textarea>`;if(type==="select")return `<label>${label}</label><select id="f_${id}"><option value="">اختاري</option>${opts.split("|").map(o=>`<option value="${esc(o)}" ${o===val?"selected":""}>${o}</option>`).join("")}</select>`;if(type==="file")return `<label>${label}</label><input id="f_${id}" type="file" accept="image/*,.pdf">`;return `<label>${label}</label><input id="f_${id}" type="${type}" value="${v}" ${type==="number"?'min="0"':''}>`}
 function renderFields(container,defs,obj){$(container).innerHTML=defs.map(d=>fieldHTML(d,obj[d[0]]||"")).join("")}
 function readFields(defs){const o={};defs.forEach(d=>{const el=$("f_"+d[0]);if(el&&d[2]!=="file")o[d[0]]=el.value.trim()});return o}
-function openSection(id){if(id==="personal"){renderPersonal();showPage(id)}else if(id==="job"){renderFields("jobFields",jobDefs,state.job);showPage(id)}else if(id==="alerts"){renderAlerts();showPage(id)}else{activeType=id;editingId=null;renderRecords();showPage("records")}}
+function openSection(id){if(id==="personal"){renderPersonal();showPage(id)}else if(id==="job"){renderJob();showPage(id)}else if(id==="alerts"){renderAlerts();showPage(id)}else{activeType=id;editingId=null;renderRecords();showPage("records")}}
 function renderPersonal(){
  const p=state.personal||{},photo=state.photo?`<img class="photo" alt="الصورة الشخصية" src="${state.photo}">`:'<div class="photo" style="display:grid;place-items:center;background:#eef2eb;color:#718071;font-size:38px">👤</div>';
  const rows=personalDefs.map(d=>`<div class="profile-row"><b>${d[1]}</b><span>${esc(p[d[0]]||"غير مدخل")}</span></div>`).join("");
@@ -139,17 +143,29 @@ function renderPersonal(){
 function startEditPersonal(){$("personalView").classList.add("hidden");$("personalViewActions").classList.add("hidden");$("personalEdit").classList.remove("hidden");renderFields("personalFields",personalDefs,state.personal||{});const img=$("photoPreview");if(state.photo){img.src=state.photo;img.classList.remove("hidden")}else img.classList.add("hidden");$("photoInput").value="";pendingPhoto=null}
 function cancelEditPersonal(){pendingPhoto=null;renderPersonal()}
 async function savePersonal(){state.personal={...state.personal,...readFields(personalDefs)};if(pendingPhoto!==null){state.photo=pendingPhoto;pendingPhoto=null}await persist();renderHome();renderPersonal();alert("تم حفظ البيانات الشخصية بنجاح.")}
-async function saveJob(){state.job=readFields(jobDefs);await persist();alert("تم حفظ البيانات الوظيفية.")}
+function renderJob(){const j=state.job||{};const rows=jobDefs.map(d=>`<div class="profile-row"><b>${d[1]}</b><span>${esc(j[d[0]]||"غير مدخل")}</span></div>`).join("");$("jobView").innerHTML=`<div class="profile-head"><div><h3>${esc(j.jobTitle||"البيانات الوظيفية")}</h3><p>المعلومات الوظيفية الرسمية</p></div></div><div class="profile-grid">${rows}</div>`;$("jobView").classList.remove("hidden");$("jobEditor").classList.add("hidden")}
+function startEditJob(){$("jobView").classList.add("hidden");$("jobEditor").classList.remove("hidden");renderFields("jobFields",jobDefs,state.job||{})}
+function cancelEditJob(){renderJob()}
+async function saveJob(){state.job=readFields(jobDefs);await persist();renderJob();alert("تم حفظ البيانات الوظيفية.")}
 function loadPhoto(e){const f=e.target.files[0];if(!f)return;if(f.size>4*1024*1024){alert("حجم الصورة أكبر من 4 ميغابايت.");e.target.value="";return}const r=new FileReader();r.onload=()=>{pendingPhoto=r.result;$("photoPreview").src=pendingPhoto;$("photoPreview").classList.remove("hidden")};r.readAsDataURL(f)}
 function removePhoto(){if(!confirm("حذف الصورة الشخصية؟"))return;pendingPhoto="";$("photoPreview").classList.add("hidden");$("photoInput").value=""}
-function renderRecords(){const c=configs[activeType],arr=state.records[activeType]||[];$("recordsTitle").textContent=c.title;$("recordsDesc").textContent=c.desc;const old=editingId?arr.find(x=>x.id===editingId)||{}:{};$("recordForm").innerHTML=c.fields.map(d=>fieldHTML(d,old[d[0]]||"")).join("");$("recordList").innerHTML=arr.length?arr.slice().reverse().map(r=>`<div class="record"><h3>${esc(recordHeading(r))}</h3>${c.fields.filter(d=>d[2]!=="file").map(d=>r[d[0]]?`<p><b>${d[1]}:</b> ${esc(r[d[0]])}</p>`:"").join("")}${r.fileName?`<p><b>المرفق:</b> ${esc(r.fileName)}</p>`:""}<div class="actions no-print"><button class="secondary small" onclick="editRecord('${r.id}')">تعديل</button><button class="danger small" onclick="deleteRecord('${r.id}')">حذف</button>${r.fileData?`<button class="secondary small" onclick="downloadDoc('${r.id}')">فتح المرفق</button>`:""}</div></div>`).join(""):'<p class="note">لا توجد سجلات مضافة حتى الآن.</p>'}
+function renderRecords(){
+ const c=configs[activeType],arr=state.records[activeType]||[];
+ $("recordsTitle").textContent=c.title;$("recordsDesc").textContent=c.desc;
+ const old=editingId?arr.find(x=>x.id===editingId)||{}:{};
+ $("recordForm").innerHTML=c.fields.map(d=>fieldHTML(d,old[d[0]]||"")).join("");
+ $("recordEditor").classList.toggle("hidden",!editingId && !addingRecord);
+ $("recordList").innerHTML=arr.length?arr.slice().reverse().map(r=>`<div class="profile-sheet"><div class="profile-head"><div><h3>${esc(recordHeading(r))}</h3><p>${esc(c.title)}</p></div></div><div class="profile-grid">${c.fields.filter(d=>d[2]!=="file").map(d=>`<div class="profile-row"><b>${d[1]}</b><span>${esc(r[d[0]]||"غير مدخل")}</span></div>`).join("")}${r.fileName?`<div class="profile-row"><b>المرفق</b><span>${esc(r.fileName)}</span></div>`:""}</div><div class="profile-actions no-print"><button class="secondary small" onclick="editRecord('${r.id}')">تعديل</button><button class="danger small" onclick="deleteRecord('${r.id}')">حذف</button>${r.fileData?`<button class="secondary small" onclick="downloadDoc('${r.id}')">فتح المرفق</button>`:""}</div></div>`).join(""):'<div class="profile-sheet"><p class="note">لا توجد سجلات محفوظة في هذا القسم حتى الآن.</p></div>';
+}
+let addingRecord=false;
+function startAddRecord(){editingId=null;addingRecord=true;renderRecords();$("recordEditor").classList.remove("hidden");window.scrollTo(0,0)}
 function recordHeading(r){return r.name||r.subject||r.type||r.issuer||r.date||r.startDate||"سجل"}
 async function saveRecord(){const c=configs[activeType],obj=readFields(c.fields),fd=c.fields.find(d=>d[2]==="file");if(fd){const f=$("f_"+fd[0]).files[0];if(f){if(f.size>5*1024*1024){alert("الحد الأقصى للمرفق 5 ميغابايت.");return}obj.fileName=f.name;obj.fileData=await fileData(f)}}
 if(activeType==="thanks"&&!obj.seniority){obj.seniority=String({"رئيس الوزراء":6,"الوزير":1,"المدير العام":1}[obj.issuer]||0)}
-const arr=state.records[activeType];if(editingId){const i=arr.findIndex(x=>x.id===editingId);if(i>=0)arr[i]={...arr[i],...obj}}else arr.push({id:crypto.randomUUID(),...obj});editingId=null;await persist();renderRecords();alert("تم حفظ السجل.")}
+const arr=state.records[activeType];if(editingId){const i=arr.findIndex(x=>x.id===editingId);if(i>=0)arr[i]={...arr[i],...obj}}else arr.push({id:crypto.randomUUID(),...obj});editingId=null;addingRecord=false;await persist();renderRecords();alert("تم حفظ السجل.")}
 function fileData(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)})}
-function editRecord(id){editingId=id;renderRecords();window.scrollTo(0,0)}
-function cancelEdit(){editingId=null;renderRecords()}
+function editRecord(id){editingId=id;addingRecord=false;renderRecords();$("recordEditor").classList.remove("hidden");window.scrollTo(0,0)}
+function cancelEdit(){editingId=null;addingRecord=false;renderRecords()}
 async function deleteRecord(id){if(!confirm("تأكيد حذف هذا السجل؟"))return;state.records[activeType]=state.records[activeType].filter(x=>x.id!==id);await persist();renderRecords()}
 function downloadDoc(id){const r=state.records.documents.find(x=>x.id===id);if(!r?.fileData)return;const a=document.createElement("a");a.href=r.fileData;a.download=r.fileName||"document";a.click()}
 function addMonths(s,n){if(!s)return null;const d=new Date(s+"T12:00:00");if(isNaN(d))return null;const day=d.getDate();d.setMonth(d.getMonth()+n);if(d.getDate()<day)d.setDate(0);return d}
