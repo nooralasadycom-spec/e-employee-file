@@ -589,6 +589,12 @@ function fieldHTML(def,value=""){
   return `<label>${label}</label><input id="f_${id}" type="file" accept="application/pdf,.pdf,image/*">`;
  }
 
+ if(type==="date"){
+  return `<label>${label}</label>
+   <input id="f_${id}" type="date" value="${safeValue}">
+   <button type="button" class="secondary small" onclick="document.getElementById('f_${id}').value=''">إعادة تعيين</button>`;
+ }
+
  return `<label>${label}</label><input id="f_${id}" type="${type}" value="${safeValue}" ${type==="number"?'min="0"':''}>`;
 }
 
